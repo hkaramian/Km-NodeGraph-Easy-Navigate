@@ -3,7 +3,7 @@
 
 #
 #
-# Km NodeGraph Easy Navigate v1.0
+# Km NodeGraph Easy Navigate v1.1
 #
 # Developed By Hossein Karamian
 # 
@@ -19,6 +19,7 @@
 """
 Change Log :
 v1.0 | first version | December 4 , 2020 
+v1.1 | nuke 13 compatible | November 1 , 2021
 """
 
 
@@ -45,7 +46,7 @@ try:
         from PySide2.QtWidgets import *
         #print "Km Backup And Recovery ToolKit : www.kmworks.ir"
 except ImportError:
-    print "not in nuke" # pycharm
+    print ("not in nuke") # pycharm
     try:
         from PySide.QtCore import *
         from PySide.QtGui import *
@@ -713,7 +714,7 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", "Middle Button :   Edit"))
         self.label_2.setText(_translate("Form", "Right Button  :    Remove"))
         self.label_6.setText(_translate("Form", "Assign Bookmark : Select a node or backdrop, Then click on an empty bookmark to assign"))
-        self.label_plugins_version.setText(_translate("Form", "Km NodeGraph Easy Navigate v1.0"))
+        self.label_plugins_version.setText(_translate("Form", "Km NodeGraph Easy Navigate v1.1"))
         self.label_8.setText(_translate("Form", "By Hossein Karamian"))
         self.label_9.setText(_translate("Form", "www.kmworks.ir"))
 

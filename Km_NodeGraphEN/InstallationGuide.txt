@@ -1,0 +1,22 @@
+Km Backup And Recovery Toolkit Installation Guide
+-----------------------------------------------------------------
+
+1. Copy 'Km_NodeGraphEN' folder to nuke plugin path
+
+2. Add following line to iniy.py file in the nuke plugin path :
+
+nuke.pluginAddPath('./Km_NodeGraphEN')
+
+
+
+ # # # # # # # # # # # # # # # # # # # # # # 
+
+ # Developed By Hossein Karamian           #
+
+ # www.kmworks.ir                          #
+               _  __  __  __ 
+ #            | |/ / |  \/  |              #
+              | ' /  | \  / |                       
+ #            |  <   | |\/| |              #
+              |_|\_\ |_|  |_|              
+ # # # # # # # # # # # # # # # # # # # # # #
