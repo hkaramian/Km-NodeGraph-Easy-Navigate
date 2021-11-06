@@ -6,7 +6,15 @@
 
 ## Introduction video
 
+<center>
 <a href="https://vimeo.com/486944274">Watch at Vimeo</a>
+
+- - - - - - - - - - - - - - - - - - - - - - - - 
+</center>
+ 
+ 
+ 
+More info : 
 
 <a href="http://www.nukepedia.com/python/nodegraph/km-nodegraph-easy-navigate/">More info - NukePedia</a>
 
