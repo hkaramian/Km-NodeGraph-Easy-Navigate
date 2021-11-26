@@ -132,36 +132,36 @@ class ActionLabel(QLabel):
                             color:white ;font-size:18px;""")
 
 
-        self.mainPosX = self.x()
-        self.mainPosY = self.y()
-        self.anim3 = QPropertyAnimation(self, "geometry")
-        self.anim3.setDuration(100)
-        w = 70
-        h = 70
-        self.anim3.setStartValue(QRect(self.mainPosX, self.mainPosY, w, h))
-        self.anim3.setEndValue(QRect(self.mainPosX-((110-w)/2), self.mainPosY-((110-h)/2), 110, 110))
+        # self.mainPosX = self.x()
+        # self.mainPosY = self.y()
+        # self.anim3 = QPropertyAnimation(self, "geometry")
+        # self.anim3.setDuration(100)
+        # w = 70
+        # h = 70
+        # self.anim3.setStartValue(QRect(self.mainPosX, self.mainPosY, w, h))
+        # self.anim3.setEndValue(QRect(self.mainPosX-((110-w)/2), self.mainPosY-((110-h)/2), 110, 110))
 
 
 
-        self.anim = QPropertyAnimation(self, "minimumHeight")
-        self.anim.setDuration(100)
-        self.anim.setStartValue(70)
-        self.anim.setEndValue(110)    
+        # self.anim = QPropertyAnimation(self, "minimumHeight")
+        # self.anim.setDuration(100)
+        # self.anim.setStartValue(70)
+        # self.anim.setEndValue(110)    
 
-        self.anim2 = QPropertyAnimation(self, "minimumWidth")
-        self.anim2.setDuration(100)
-        self.anim2.setStartValue(70)
-        self.anim2.setEndValue(110)
+        # self.anim2 = QPropertyAnimation(self, "minimumWidth")
+        # self.anim2.setDuration(100)
+        # self.anim2.setStartValue(70)
+        # self.anim2.setEndValue(110)
 
-        self.anim3.start()
-        self.anim.start()
-        self.anim2.start()
+        # self.anim3.start()
+        # self.anim.start()
+        # self.anim2.start()
         #print "done"
         #self.anim2.start()
 
     def scaleUpEffect(self):
         scale = 70
-        for i in xrange( 0, 100 ):
+        for i in range( 0, 100 ):
             time.sleep( 0.0015 )
             #print(datetime.datetime.now())
             scale = scale + 0.5
@@ -175,24 +175,24 @@ class ActionLabel(QLabel):
         #    self.setStyleSheet(COLORS['regular'])
 
         
-        self.anim = QPropertyAnimation(self, "minimumHeight")
-        self.anim.setDuration(100)
-        self.anim.setStartValue(110)
-        self.anim.setEndValue(70)    
+        # self.anim = QPropertyAnimation(self, "minimumHeight")
+        # self.anim.setDuration(100)
+        # self.anim.setStartValue(110)
+        # self.anim.setEndValue(70)    
 
-        self.anim2 = QPropertyAnimation(self, "minimumWidth")
-        self.anim2.setDuration(100)
-        self.anim2.setStartValue(110)
-        self.anim2.setEndValue(70)
+        # self.anim2 = QPropertyAnimation(self, "minimumWidth")
+        # self.anim2.setDuration(100)
+        # self.anim2.setStartValue(110)
+        # self.anim2.setEndValue(70)
 
-        w = 70
-        h = 70
-        self.anim3.setStartValue(QRect(self.mainPosX, self.mainPosY, w, h))
-        self.anim3.setEndValue(QRect(self.mainPosX+((110-w)/2), self.mainPosY+((110-h)/2), 70, 70))
+        # w = 70
+        # h = 70
+        # self.anim3.setStartValue(QRect(self.mainPosX, self.mainPosY, w, h))
+        # self.anim3.setEndValue(QRect(self.mainPosX+((110-w)/2), self.mainPosY+((110-h)/2), 70, 70))
 
-        self.anim3.start()
-        self.anim.start()
-        self.anim2.start()
+        # self.anim3.start()
+        # self.anim.start()
+        # self.anim2.start()
         
  
     def JumpAndShakeEffect(self,SN):
@@ -202,7 +202,7 @@ class ActionLabel(QLabel):
         nuke.zoom( 1, [ xC, yC ])
 
         move_value = 5  
-        for i in xrange( 0, 8 ):
+        for i in range( 0, 8 ):
             move_value = move_value * -1
             SN.setXpos(int(SN["xpos"].getValue())+ move_value)
             time.sleep( 0.05 )
@@ -211,7 +211,7 @@ class ActionLabel(QLabel):
 
     def ZoomInEffect(self,SN):
         zoom = 0.1  
-        for i in xrange( 0, 200 ):
+        for i in range( 0, 200 ):
             time.sleep( 0.0015 )
             #print(datetime.datetime.now())
             node = SN
