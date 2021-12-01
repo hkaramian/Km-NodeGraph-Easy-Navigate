@@ -1,4 +1,4 @@
-Km Backup And Recovery Toolkit Installation Guide
+Km NodeGraph Easy Navigate Installation Guide
 -----------------------------------------------------------------
 
 1. Copy 'Km_NodeGraphEN' folder to nuke plugin path
