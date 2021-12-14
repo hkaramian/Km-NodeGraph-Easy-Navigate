@@ -45,7 +45,6 @@ QLineEdit {
 	background-color: rgb(40, 43, 50);
 	border-radius: 5px;
 	border: 2px solid rgb(40, 43, 50);
-	padding-left: 10px;
 }
 QLineEdit:hover {
 	border: 2px solid rgb(64, 71, 88);
@@ -145,7 +144,7 @@ QCheckBox::indicator:hover {
 QCheckBox::indicator:checked {
     background: 3px solid rgb(52, 59, 72);
 	border: 3px solid rgb(52, 59, 72);	
-	background-image: url(:/16x16/icons/16x16/cil-check-alt.png);
+	background-image: url(../Km_NodeGraphEN/icons/cil-check-alt.png);
 }
 
 /* RADIO BUTTON */
@@ -381,7 +380,7 @@ QSlider::handle:vertical:pressed {
 </string>
            </property>
            <property name="text">
-            <string>Km NodeGraph Easy Navigate - Settings</string>
+            <string>Km NodeGraph Easy Navigate</string>
            </property>
            <property name="margin">
             <number>5</number>
@@ -466,8 +465,8 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="D:/Downloads/Compressed/Simple_PySide_Base-master/files.qrc">
-             <normaloff>:/16x16/icons/16x16/cil-window-minimize.png</normaloff>:/16x16/icons/16x16/cil-window-minimize.png</iconset>
+            <iconset>
+             <normaloff>../Km_NodeGraphEN/icons/cil-window-minimize.png</normaloff>../Km_NodeGraphEN/icons/cil-window-minimize.png</iconset>
            </property>
           </widget>
          </item>
@@ -511,8 +510,8 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="D:/Downloads/Compressed/Simple_PySide_Base-master/files.qrc">
-             <normaloff>:/16x16/icons/16x16/cil-x.png</normaloff>:/16x16/icons/16x16/cil-x.png</iconset>
+            <iconset>
+             <normaloff>../Km_NodeGraphEN/icons/cil-x.png</normaloff>../Km_NodeGraphEN/icons/cil-x.png</iconset>
            </property>
           </widget>
          </item>
@@ -669,6 +668,9 @@ border-radius: 5px;
       <property name="text">
        <string>shift+e</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
@@ -727,9 +729,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>160</y>
+        <y>175</y>
         <width>101</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -745,9 +747,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>70</y>
+        <y>64</y>
         <width>61</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -766,9 +768,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>70</y>
+        <y>64</y>
         <width>71</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -784,9 +786,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>100</y>
+        <y>101</y>
         <width>61</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -805,9 +807,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>130</y>
+        <y>138</y>
         <width>101</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -823,9 +825,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>130</y>
+        <y>138</y>
         <width>61</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -863,9 +865,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>160</y>
+        <y>175</y>
         <width>61</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -884,9 +886,9 @@ width : 2px</string>
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>100</y>
+        <y>101</y>
         <width>71</width>
-        <height>20</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="font">
@@ -1290,7 +1292,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>500</y>
+       <y>504</y>
        <width>571</width>
        <height>36</height>
       </rect>
@@ -1302,6 +1304,9 @@ QPushButton:pressed {
          <font>
           <family>Segoe UI Semibold</family>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(200, 200, 200);</string>
         </property>
         <property name="text">
          <string>Km NodeGraph Easy Navigate v2.0</string>
@@ -1329,6 +1334,9 @@ QPushButton:pressed {
            <font>
             <family>Segoe UI Semibold</family>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(200, 200, 200);</string>
           </property>
           <property name="text">
            <string>By Hossein Karamian</string>

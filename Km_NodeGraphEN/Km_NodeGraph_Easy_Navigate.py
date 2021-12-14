@@ -501,19 +501,51 @@ class NewBookMarkWindow(nukescripts.PythonPanel):
 
 
 
+# url(./icons
+# 
+
+
+
 class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
     def __init__(self):
         super(SettingsWindow, self).__init__()
         self.setupUi(self)
+
+        #self.setWindowFlags(Qt.WindowStaysOnTopHint)
+
+        ## REMOVE TITLE BAR
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+
+        # opacity
+        # self.op_effect=QGraphicsOpacityEffect(self)
+        # self.opacity_value = 0.92
+        # self.op_effect.setOpacity(self.opacity_value)
+        # self.setGraphicsEffect(self.op_effect)
+
+        ## DROP SHADOW EFFECT
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QColor(0, 0, 0, 100))
+        self.frame.setGraphicsEffect(self.shadow)
+
         self.settings = model.Settings().Load()
         # Setup UI
         self.horizontalSlider_ZoomScale.setMinimum(5) 
         self.horizontalSlider_ZoomScale.setMaximum(30)
         self.horizontalSlider_ZoomScale.setSingleStep(1)
         self.horizontalSlider_ZoomScale.valueChanged.connect(self.SliderLabelUpdate)
-        self.label_credit.setText('''<a href='http://www.kmworks.ir' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
+        self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        checkBoxStyle = 'QCheckBox::indicator:checked {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-check-alt.png);}'
+        self.checkBox_zoom_effect.setStyleSheet(checkBoxStyle)
+        self.checkBox_shake_effect.setStyleSheet(checkBoxStyle)
+        self.checkBox_fade_effect.setStyleSheet(checkBoxStyle)
+        
+
+
         # Signals
         self.pushButton_save.clicked.connect(self.applySettings)
         self.pushButton_setDefault.clicked.connect(self.SetDefault)
