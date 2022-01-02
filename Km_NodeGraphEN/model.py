@@ -123,6 +123,7 @@ class BookmarkTemplates :
                         } 
                         }
         bookmarksData = Bookmarks.Load()
+        if (len(bookmarksData) == 0) : return False # return if there is no bookmark
         counter = 1
         for item in bookmarksData :
             templateData['bookmarks'][counter] =  {"nodeName": item["nodeName"], "title": item["title"], "index": item["index"], "shortcut": item["shortcut"]}

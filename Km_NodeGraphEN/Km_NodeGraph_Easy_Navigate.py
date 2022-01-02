@@ -5,7 +5,7 @@
 #
 # Developed By Hossein Karamian
 # 
-# www.kmworks.ir
+# www.hkaramian.com
 # kmworks.call@gmail.com
 #    _  __  __  __ 
 #   | |/ / |  \/  |
@@ -80,6 +80,7 @@ import time
 import subprocess
 import datetime
 import json
+import webbrowser
 
 # Pyside Library Import (pyside and pyside 2)  : pyside for nuke10.5 and older , pyside2 for nuke 11.0 and newer
 from PysideImport import *
@@ -112,7 +113,7 @@ class MainWindow(QWidget):
         #QDesktopWidget().screenGeometry(-1).width()
         #screenHeight = QDesktopWidget().screenGeometry(-1).height()
         #QCursor.pos().x()
-        offset = QPoint(width * 0.5, height * 1 + 30)
+        offset = QPoint(width * 0.5, height * 0.5 + 30)
         self.move(QCursor.pos() - offset)
         self.setContentsMargins(0,0,0,0)
 
@@ -131,10 +132,10 @@ class MainWindow(QWidget):
 
         allBookmarksData = model.Bookmarks.Load()
         # Template Global Override 
-        if self.settings["templateGlobalOverride"] == "Enable" :
-            templateFileName = self.settings["globalOverrideTemplateFileName"]
-            if model.BookmarkTemplates.GetATemplateData(templateFileName) :
-                allBookmarksData = model.BookmarkTemplates.GetATemplateData(templateFileName)["bookmarks"].values()
+        # if self.settings["templateGlobalOverride"] == "Enable" :
+        #     templateFileName = self.settings["globalOverrideTemplateFileName"]
+        #     if model.BookmarkTemplates.GetATemplateData(templateFileName) :
+        #         allBookmarksData = model.BookmarkTemplates.GetATemplateData(templateFileName)["bookmarks"].values()
 
         for index in range(0, numberOfBoomarks):
             isEmpty = True
@@ -169,17 +170,19 @@ class MainWindow(QWidget):
         # set main layout
         self.setLayout(mainVerticalLayout)
 
+
         # Opacity(Fade In) Effect
         finalOpacity = 0.9
         self.SetWindowProperties()
         self.effect = QGraphicsOpacityEffect()
-        self.effect.setOpacity(0)
-        self.setGraphicsEffect(self.effect)
-        self.fade = QPropertyAnimation(self.effect, 'opacity'.encode())  # encode is utf-8 by default      
-        self.fade.setDuration(300)
-        self.fade.setStartValue(0)
-        self.fade.setEndValue(finalOpacity)
-        self.fade.start()
+        if self.settings["mainWindowFadeInEffect"] == "Enable" :
+            self.effect.setOpacity(0)
+            self.setGraphicsEffect(self.effect)
+            self.fade = QPropertyAnimation(self.effect, 'opacity'.encode())  # encode is utf-8 by default      
+            self.fade.setDuration(300)
+            self.fade.setStartValue(0)
+            self.fade.setEndValue(finalOpacity)
+            self.fade.start()
 
     def SetWindowProperties(self):
         """Set window falgs and focused widget."""
@@ -236,6 +239,11 @@ class BookmarkButton(QLabel):
         self.setText(bookmarkData["title"])
         self.setWordWrap(True)
 
+        # define bookmark shortcut and top menu
+        if self.nodeName != "empty" :
+            menu = nuke.menu("Nuke")
+            Km_NGJ = menu.addMenu("KmTools")
+            Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+bookmarkData["title"],lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])
 
     def enterEvent(self, event): 
         self.setStyleSheet("""background:orange; border-radius: 10px;
@@ -246,38 +254,51 @@ class BookmarkButton(QLabel):
                             color:white;font-size:12px;""")
       
     def JumpToTargetAndShakeNode(self,targetNodeName):
-        #Jump :
+        self.settings = model.Settings().Load()
+        zoomScale = float(self.settings["nodeGraphZoomScale"])
         TargetNode = nuke.toNode(targetNodeName)
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
-        yC = TargetNode.ypos() + TargetNode.screenHeight()/2
-        nuke.zoom( 1, [ xC, yC ])
+        yC = TargetNode.ypos()
+        nuke.zoom( zoomScale, [ xC, yC ])
         #Shake :
         moveValue = 5  
         for i in range( 0, 8 ):
             moveValue = moveValue * -1
             TargetNode.setXpos(int(TargetNode["xpos"].getValue())+ moveValue)
             time.sleep( 0.05 )
-            #print move_value
-            #print(datetime.datetime.now())
 
     def JumpToTargetWithZoomEffect(self,targetNodeName):
+        self.settings = model.Settings().Load()
+        zoomScale = float(self.settings["nodeGraphZoomScale"])
         TargetNode = nuke.toNode(targetNodeName)
         zoom = 0.1  
         for i in range( 0, 200 ):
             time.sleep( 0.0001 )
             #print(datetime.datetime.now())
             xC = TargetNode.xpos() + TargetNode.screenWidth()/2
-            yC = TargetNode.ypos() + TargetNode.screenHeight()/2
+            yC = TargetNode.ypos()
             zoom = zoom + 0.05
-            if zoom > 1:
+            if zoom > zoomScale:
                 break
             nuke.zoom( zoom, [ xC, yC ])
 
     def JumpToTargetWithoutEffect(self,targetNodeName):
+        self.settings = model.Settings().Load()
+        zoomScale = float(self.settings["nodeGraphZoomScale"])
         TargetNode = nuke.toNode(targetNodeName)
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
-        yC = TargetNode.ypos() + TargetNode.screenHeight()/2
-        nuke.zoom( 1, [ xC, yC ])
+        yC = TargetNode.ypos()
+        nuke.zoom( zoomScale, [ xC, yC ])
+
+    def JumpToNode(self,targetNodeName) : 
+        if self.myParrent.settings["zoomEffect"] == "Enable":
+            threading.Thread( target=self.JumpToTargetWithZoomEffect, args=(targetNodeName,)).start()
+        else:
+            self.JumpToTargetWithoutEffect(targetNodeName)
+
+        if self.myParrent.settings["shakeEffect"] == "Enable":
+            threading.Thread( target=self.JumpToTargetAndShakeNode, args=(targetNodeName,)).start()
+
 
     def mousePressEvent(self, event):
         navigationEffect = "JumpAndShake"
@@ -307,13 +328,7 @@ class BookmarkButton(QLabel):
                         nuke.message("Selected node exists in the list, you can delete or edite that")
             # jump to bookmark
             else :
-                if self.myParrent.settings["zoomEffect"] == "Enable":
-                    threading.Thread( target=self.JumpToTargetWithZoomEffect, args=(self.nodeName,)).start()
-                else:
-                    self.JumpToTargetWithoutEffect(self.nodeName)
-
-                if self.myParrent.settings["shakeEffect"] == "Enable":
-                    threading.Thread( target=self.JumpToTargetAndShakeNode, args=(self.nodeName,)).start()
+                self.JumpToNode(self.nodeName)
              
         if event.buttons() == Qt.RightButton:
             if self.nodeName != "empty":
@@ -331,6 +346,7 @@ class BookmarkButton(QLabel):
                     bookmarkData = {"nodeName": self.nodeName,"title": title, "index": index, "shortcut" : shortcut}
                     model.Bookmarks.UpdateBookmarkData(bookmarkData)
 
+        updateShortcuts()
         self.myParrent.close()
 
 
@@ -438,7 +454,7 @@ class MainMenuWidget(QWidget):
         self.templatesWindowInstance.show()
 
     def OpenEditBookmarksWindow(self) : 
-        self.editBookmarksInstance = EditBookmarks()
+        self.editBookmarksInstance = EditBookmarksWindow()
         self.editBookmarksInstance.show()
 
 
@@ -501,8 +517,13 @@ class NewBookMarkWindow(nukescripts.PythonPanel):
 
 
 
-# url(./icons
-# 
+            
+ ################################################################################
+## ui_  .py changes needed for new version from qt designer : 
+## add import os 
+## Replace  : 
+## u"../Km_NodeGraphEN/icons
+## os.path.dirname(__file__)+"/icons
 
 
 
@@ -531,6 +552,9 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.shadow.setColor(QColor(0, 0, 0, 100))
         self.frame.setGraphicsEffect(self.shadow)
 
+        # remove text shadows
+        self.RemoveDefaultTextShadow()
+
         self.settings = model.Settings().Load()
         # Setup UI
         self.horizontalSlider_ZoomScale.setMinimum(5) 
@@ -543,6 +567,8 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.checkBox_zoom_effect.setStyleSheet(checkBoxStyle)
         self.checkBox_shake_effect.setStyleSheet(checkBoxStyle)
         self.checkBox_fade_effect.setStyleSheet(checkBoxStyle)
+        # adding window drag to title bar
+        self.AddWindowDragToTitleBar()
         
 
 
@@ -550,9 +576,44 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.pushButton_save.clicked.connect(self.applySettings)
         self.pushButton_setDefault.clicked.connect(self.SetDefault)
         self.pushButton_OpenPDF.clicked.connect(self.open_documentation)
+        self.pushButton_BuyMeACoffee.clicked.connect(self.BuyMeACoffee)
+        self.pushButton_minimize.clicked.connect(self.showMinimized)
+        self.pushButton_close.clicked.connect(self.close)
+
 
         
         self.updateUI()
+
+
+    def RemoveDefaultTextShadow(self):
+        """Get Rid of nuke pyside default style that apply shadow for texts"""   
+        #self.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_save.setStyle(QStyleFactory.create('Windows'))
+        self.label_2.setStyle(QStyleFactory.create('Windows'))
+        self.label_7.setStyle(QStyleFactory.create('Windows'))
+        self.label_plugins_version.setStyle(QStyleFactory.create('Windows'))
+        self.label_credit.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_setDefault.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_BuyMeACoffee.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_OpenPDF.setStyle(QStyleFactory.create('Windows'))
+
+    # for adding window drag to title bar
+    def mousePressEvent(self, event ) :
+        self.clickPosition = event.globalPos()
+    # adding window drag to title bar
+    def AddWindowDragToTitleBar(self):
+        def moveWindow(e):
+            if self.isMaximized() == False:
+                if e.buttons() == Qt.LeftButton :
+                    self.move(self.pos() + e.globalPos() - self.clickPosition)
+                    self.clickPosition = e.globalPos()
+                    e.accept()
+        self.frame_top_btns.mouseMoveEvent = moveWindow
+
+
+    def BuyMeACoffee(self) :
+        url = "https://www.buymeacoffee.com/karamian"
+        webbrowser.open(url)
 
     def updateUI(self):
 
@@ -606,7 +667,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         model.Settings().Save(self.settings)
         menu = nuke.menu("Nuke")
         Km_NGJ = menu.addMenu("KmTools")
-        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.start()",self.settings["shortcut"])
+        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.ShowMainWindow()",self.settings["shortcut"])
         self.close()
 
     def SetDefault(self) : 
@@ -623,7 +684,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         model.Settings().Save(self.settings)
         menu = nuke.menu("Nuke")
         Km_NGJ = menu.addMenu("KmTools")
-        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.start()",self.settings["shortcut"])
+        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.ShowMainWindow()",self.settings["shortcut"])
         self.updateUI()
 
     def open_documentation(self):
@@ -637,23 +698,94 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
     def __init__(self,parent=None):
         super(TemplatesWindow, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
-        self.setWindowFlags(Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint) # disable resize
-        self.label_credit.setText('''<a href='http://www.kmworks.ir' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
+        #self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+        #self.setWindowFlags(Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint) # disable resize
+
+        # remove text shadows
+        self.RemoveDefaultTextShadow()
+
+        ## REMOVE TITLE BAR
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        
+        ## DROP SHADOW EFFECT
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QColor(0, 0, 0, 100))
+        self.frame.setGraphicsEffect(self.shadow)
+
+        # adding window drag to title bar
+        self.AddWindowDragToTitleBar()
+        
+        self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
         #self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         # UpdateUI
         self.UpdateUI()
 
+        
+        #qomboBoxStyle = 'QComboBox::drop-down {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-arrow-bottom.png);}'
+#         self.comboBox_TemplateOverride.setStyleSheet(u"QComboBox{\n"
+# "	background-color:rgb(40, 43, 50);\n"
+# "	border-radius: 5px;\n"
+# "	border: 2px solid rgb(40, 43, 50);\n"
+# "	padding: 5px;\n"
+# "	padding-left: 10px;\n"
+# "}\n"
+# "QComboBox::drop-down {\n"
+# "	subcontrol-origin: padding;\n"
+# "	subcontrol-position: top right;\n"
+# "	width: 25px; \n"
+# "	border-left-width: 3px;\n"
+# "	border-left-color: rgba(39, 44, 54, 150);\n"
+# "	border-left-style: solid;\n"
+# "	border-top-right-radius: 3px;\n"
+# "	border-bottom-right-radius: 3px;	\n"
+# "	background-image: url("+os.path.dirname(__file__).replace(os.sep,'/')+"/icons/cil-arrow-bottom.png);\n"
+# "	background-position: center;\n"
+# "	background-repeat: no-reperat;\n"
+# " }")
+
         # Signals
+        self.pushButton_minimize.clicked.connect(self.showMinimized)
+        self.pushButton_close.clicked.connect(self.close)
         self.pushButton_remove.clicked.connect(self.removeTemplate)
         self.pushButton_load.clicked.connect(self.LoadTemplate)
         self.pushButton_add.clicked.connect(self.AddTemplate)
-        self.comboBox_TemplateOverride.currentIndexChanged.connect(self.ComboBoxTemplateOverrideChange)
-        self.checkBox_TemplateOverride.stateChanged['int'].connect(self.CheckBoxTemplateOverrideChange)
+        # self.comboBox_TemplateOverride.currentIndexChanged.connect(self.ComboBoxTemplateOverrideChange)
+        # self.checkBox_TemplateOverride.stateChanged['int'].connect(self.CheckBoxTemplateOverrideChange)
 
         self.listWidget_templateList.currentItemChanged.connect(self.selectedTemplateItemsListUpdateUI)
+
+
+        checkBoxStyle = 'QCheckBox::indicator:checked {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-check-alt.png);}'
+        # self.checkBox_TemplateOverride.setStyleSheet(checkBoxStyle)
+
+
+
+    def RemoveDefaultTextShadow(self):
+        """Get Rid of nuke pyside default style that apply shadow for texts"""   
+        #self.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_load.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_remove.setStyle(QStyleFactory.create('Windows'))
+        self.pushButton_add.setStyle(QStyleFactory.create('Windows'))
+
+
+    # for adding window drag to title bar
+    def mousePressEvent(self, event ) :
+        self.clickPosition = event.globalPos()
+    # adding window drag to title bar
+    def AddWindowDragToTitleBar(self):
+        def moveWindow(e):
+            if self.isMaximized() == False:
+                if e.buttons() == Qt.LeftButton :
+                    self.move(self.pos() + e.globalPos() - self.clickPosition)
+                    self.clickPosition = e.globalPos()
+                    e.accept()
+        self.frame_top_btns.mouseMoveEvent = moveWindow
 
     def UpdateUI(self) :
         self.settings = model.Settings().Load()
@@ -664,7 +796,7 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         self.listWidget_templateItems.clear() 
         self.listWidget_newTemplateItems.clear() # clear list widget
         self.listWidget_templateList.clear() # clear list widget
-        self.comboBox_TemplateOverride.clear()
+        # self.comboBox_TemplateOverride.clear()
 
         # new Template Items listWidget 
         itemCounter = 0
@@ -674,45 +806,45 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
             itemCounter += 1
 
         # templates list
-        self.overrideTemplateIndex = -1 # if override template file not exits
+        # self.overrideTemplateIndex = -1 # if override template file not exits
         itemCounter = 0
         for templateItem in self.templatesList : 
             QListWidgetItem(self.listWidget_templateList)
             self.listWidget_templateList.item(itemCounter).setText(templateItem["templateName"])
-            self.comboBox_TemplateOverride.addItem(templateItem["templateName"])
-            if templateItem["fileName"] == self.settings["globalOverrideTemplateFileName"] : 
-                self.overrideTemplateIndex = itemCounter
+            # self.comboBox_TemplateOverride.addItem(templateItem["templateName"])
+            # if templateItem["fileName"] == self.settings["globalOverrideTemplateFileName"] : 
+            #     self.overrideTemplateIndex = itemCounter
             itemCounter += 1
   
-        if self.overrideTemplateIndex != -1 :
-            self.comboBox_TemplateOverride.setCurrentIndex(self.overrideTemplateIndex)
+        # if self.overrideTemplateIndex != -1 :
+        #     self.comboBox_TemplateOverride.setCurrentIndex(self.overrideTemplateIndex)
 
-        if self.settings["templateGlobalOverride"] == "Enable" :
-            self.checkBox_TemplateOverride.setChecked(True)
-            self.comboBox_TemplateOverride.setEnabled(True)
-        else :
-            self.checkBox_TemplateOverride.setChecked(False)
-            self.comboBox_TemplateOverride.setEnabled(False)
+        # if self.settings["templateGlobalOverride"] == "Enable" :
+        #     self.checkBox_TemplateOverride.setChecked(True)
+        #     self.comboBox_TemplateOverride.setEnabled(True)
+        # else :
+        #     self.checkBox_TemplateOverride.setChecked(False)
+        #     self.comboBox_TemplateOverride.setEnabled(False)
 
 
         
         
-    def CheckBoxTemplateOverrideChange(self):
-        if self.checkBox_TemplateOverride.isChecked():
-            self.comboBox_TemplateOverride.setEnabled(True)
-            self.settings["templateGlobalOverride"] = "Enable"
-        else : 
-            self.comboBox_TemplateOverride.setEnabled(False)
-            self.settings["templateGlobalOverride"] = "Disable"
-        if self.comboBox_TemplateOverride.count != 0 :
-            currentIndex = self.comboBox_TemplateOverride.currentIndex()
-            self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
-        model.Settings.Save(self.settings)
+    # def CheckBoxTemplateOverrideChange(self):
+    #     if self.checkBox_TemplateOverride.isChecked():
+    #         self.comboBox_TemplateOverride.setEnabled(True)
+    #         self.settings["templateGlobalOverride"] = "Enable"
+    #     else : 
+    #         self.comboBox_TemplateOverride.setEnabled(False)
+    #         self.settings["templateGlobalOverride"] = "Disable"
+    #     if self.comboBox_TemplateOverride.count != 0 :
+    #         currentIndex = self.comboBox_TemplateOverride.currentIndex()
+    #         self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
+    #     model.Settings.Save(self.settings)
 
-    def ComboBoxTemplateOverrideChange(self):
-        currentIndex = self.comboBox_TemplateOverride.currentIndex()
-        self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
-        model.Settings.Save(self.settings)       
+    # def ComboBoxTemplateOverrideChange(self):
+    #     currentIndex = self.comboBox_TemplateOverride.currentIndex()
+    #     self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
+    #     model.Settings.Save(self.settings)       
         
     def selectedTemplateItemsListUpdateUI(self):
         self.listWidget_templateItems.clear() 
@@ -748,6 +880,7 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
             self.raise_()
             self.UpdateUI()
             self.listWidget_templateList.setCurrentRow(selectedTemplateIndex)
+            updateShortcuts()
 
     def AddTemplate(self) :
         templateName = self.lineEdit_templateName.text()
@@ -765,25 +898,72 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
 
 from Ui_EditBookmarks import Ui_EditBookmarksWindowUI
 
-class EditBookmarks(QMainWindow,Ui_EditBookmarksWindowUI):
+class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
     def __init__(self,parent=None):
-        super(EditBookmarks, self).__init__(parent)
+        super(EditBookmarksWindow, self).__init__(parent)
         self.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
         #self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
-        # UpdateUI
-        self.UpdateUI()
+        ## REMOVE TITLE BAR
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
 
+        ## DROP SHADOW EFFECT
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QColor(0, 0, 0, 100))
+        self.frame.setGraphicsEffect(self.shadow)
+
+        # Setup UI
+        self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
+        self.label_credit.setOpenExternalLinks(True)
+
+        # adding window drag to title bar
+        self.AddWindowDragToTitleBar()
+
+        # remove text shadows
+        self.RemoveDefaultTextShadow()
+
+
+        # Signals
         self.pushButton_reset.clicked.connect(self.resetBookmarks)
         self.pushButton_removeItem.clicked.connect(self.removeABookmark)
         self.pushButton_shiftUp.clicked.connect(self.ShiftUpBookmark)
         self.pushButton_shiftDown.clicked.connect(self.ShiftDownBookmark)
         self.pushButton_createFromBackdrops.clicked.connect(self.createBookmarksFromBackdrops)
         self.pushButton_AddBookmark.clicked.connect(self.AddNewBookmark)
+        self.pushButton_minimize.clicked.connect(self.showMinimized)
+        self.pushButton_close.clicked.connect(self.close)
+        self.tableWidget_BookmarksList.itemChanged.connect(self.BookmarkUpdate)
 
+        # UpdateUI
+        self.UpdateUI()
         #self.listWidget_templateList.currentItemChanged.connect(self.selectedTemplateItemsListUpdateUI) 
+
+
+    def RemoveDefaultTextShadow(self):
+        """Get Rid of nuke pyside default style that apply shadow for texts"""   
+        #self.setStyle(QStyleFactory.create('Windows'))
+        self.label_credit.setStyle(QStyleFactory.create('Windows'))
+        self.label_plugins_version.setStyle(QStyleFactory.create('Windows'))
+        self.label_2.setStyle(QStyleFactory.create('Windows'))
+        self.label_7.setStyle(QStyleFactory.create('Windows'))
+
+    def BookmarkUpdate(self, item) :
+        """cell value change signal function"""
+        row = item.row()
+        #col = item.column()
+        nodeName = self.tableWidget_BookmarksList.item(row,1).text()
+        title = self.tableWidget_BookmarksList.item(row,2).text()
+        shortcut = self.tableWidget_BookmarksList.item(row,3).text()
+        bookmarkData = {"nodeName": nodeName,"title": title, "index": row, "shortcut" : shortcut}
+        model.Bookmarks.UpdateBookmarkData(bookmarkData)
+        self.UpdateUI()
+
 
 
     def AddNewBookmark(self):
@@ -887,9 +1067,23 @@ class EditBookmarks(QMainWindow,Ui_EditBookmarksWindowUI):
             self.UpdateUI()
         self.raise_()
 
-    def UpdateUI(self) :
-        #self.tableWidget_BookmarksList.clear()
 
+    # for adding window drag to title bar
+    def mousePressEvent(self, event ) :
+        self.clickPosition = event.globalPos()
+    # adding window drag to title bar
+    def AddWindowDragToTitleBar(self):
+        def moveWindow(e):
+            if self.isMaximized() == False:
+                if e.buttons() == Qt.LeftButton :
+                    self.move(self.pos() + e.globalPos() - self.clickPosition)
+                    self.clickPosition = e.globalPos()
+                    e.accept()
+        self.frame_top_btns.mouseMoveEvent = moveWindow
+
+    def UpdateUI(self) :
+        updateShortcuts()
+        self.tableWidget_BookmarksList.blockSignals(True) # disable Item Change signal
         # new Template Items listWidget 
         currentProjectBookmarks = model.Bookmarks.Load()
         settings = model.Settings.Load()
@@ -923,6 +1117,8 @@ class EditBookmarks(QMainWindow,Ui_EditBookmarksWindowUI):
             item = self.CreateWidgetItemAndSetFlags(shortcut,isEmpty)
             self.tableWidget_BookmarksList.setItem(index,3,item) # shortcut column
 
+        self.tableWidget_BookmarksList.blockSignals(False) # enable Item Change signal
+
     def CreateWidgetItemAndSetFlags(self,text,IsDisable=False) :
         widgetItem = QTableWidgetItem()
         if IsDisable : widgetItem.setFlags(Qt.ItemIsSelectable|Qt.ItemIsEnabled)
@@ -939,14 +1135,35 @@ class EditBookmarks(QMainWindow,Ui_EditBookmarksWindowUI):
 ## u"../Km_NodeGraphEN/icons
 ## os.path.dirname(__file__)+"/icons
 
-
-def showSettings():
+def ShowSettings():
     global settingsWindowInstance
     settingsWindowInstance = SettingsWindow()
     settingsWindowInstance.show()
 
-def start():
+def ShowEditBookmarksWindow():
+    global editBookmarksWindowInstance
+    editBookmarksWindowInstance = EditBookmarksWindow()
+    editBookmarksWindowInstance.show()
+
+def ShowTemplatesWindow():
+    global templatesWindowInstance
+    templatesWindowInstance = TemplatesWindow()
+    templatesWindowInstance.show()
+
+def ShowMainWindow():
     """Start up function for MainWindow"""
     global mainWindowInstance  # pylint: disable=global-statement
     mainWindowInstance = MainWindow()
     mainWindowInstance.show()
+
+
+def updateShortcuts():
+    """create an instance of main window to update bookmarks in top menu & shortcuts
+      (we define each bookmark shortcut in BookmarkButton Class) """
+    menu = nuke.menu("Nuke")
+    tappmenu = menu.findItem('KmTools/Km NodeGraph Easy Navigate')
+    tappmenu.removeItem('Bookmarks') # remove older shortcuts
+    MainWindow() # define shortcuts
+
+# add nuke callbacks
+nuke.addOnScriptLoad(updateShortcuts)

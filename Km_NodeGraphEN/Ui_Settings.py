@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'panel_v02 - SettingscCNRlz.ui'
+## Form generated from reading UI file 'panel_v02 - SettingskglSob.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
@@ -21,7 +21,7 @@ class Ui_SettingsWindowUI(object):
     def setupUi(self, SettingsWindowUI):
         if not SettingsWindowUI.objectName():
             SettingsWindowUI.setObjectName(u"SettingsWindowUI")
-        SettingsWindowUI.resize(633, 560)
+        SettingsWindowUI.resize(635, 557)
         font = QFont()
         font.setFamily(u"Segoe UI")
         SettingsWindowUI.setFont(font)
@@ -143,13 +143,13 @@ class Ui_SettingsWindowUI(object):
 "QCheckBox::indicator:checked {\n"
 "    background: 3px solid rgb(52, 59, 72);\n"
 "	border: 3px solid rgb(52, 59, 72);	\n"
-"	background-image: url(./icons/cil-check-alt.png);\n"
+"	background-image: url(../Km_NodeGraphEN/icons/cil-check-alt.png);\n"
 "}\n"
 "\n"
 "/* RADIO BUTTON */\n"
 "QRadioButton::indicator {\n"
-"    border: 3px solid rgb(52, 59, 72"
-                        ");\n"
+"    border: 3px soli"
+                        "d rgb(52, 59, 72);\n"
 "	width: 15px;\n"
 "	height: 15px;\n"
 "	border-radius: 10px;\n"
@@ -185,8 +185,8 @@ class Ui_SettingsWindowUI(object):
 "	border-bottom-right-radius: 3px;	\n"
 "	background-image: url(:/16x16/icons/16x16/cil-arrow-bottom.png);\n"
 "	background-position: center;\n"
-"	background-repeat: no-reperat;"
-                        "\n"
+"	background-rep"
+                        "eat: no-reperat;\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
 "	color: rgb(85, 170, 255);	\n"
@@ -226,9 +226,9 @@ class Ui_SettingsWindowUI(object):
 "    margin: 0px;\n"
 "	background-color: rgb(52, 59, 72);\n"
 "}\n"
-"QSlider::groove:vertical:hover {\n"
-"	backgrou"
-                        "nd-color: rgb(55, 62, 76);\n"
+"QSlider::groove:vertical:hover"
+                        " {\n"
+"	background-color: rgb(55, 62, 76);\n"
 "}\n"
 "QSlider::handle:vertical {\n"
 "    background-color: rgb(85, 170, 255);\n"
@@ -252,7 +252,9 @@ class Ui_SettingsWindowUI(object):
         self.frame_top_btns.setObjectName(u"frame_top_btns")
         self.frame_top_btns.setGeometry(QRect(0, 0, 611, 42))
         self.frame_top_btns.setMaximumSize(QSize(16777215, 42))
-        self.frame_top_btns.setStyleSheet(u"background-color: rgb(40, 43, 50);")
+        self.frame_top_btns.setStyleSheet(u"background-color: rgb(40, 43, 50);\n"
+"border-bottom-left-radius: 1px;\n"
+"border-bottom-right-radius: 1px;")
         self.frame_top_btns.setFrameShape(QFrame.NoFrame)
         self.frame_top_btns.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_top_btns)
@@ -317,53 +319,57 @@ class Ui_SettingsWindowUI(object):
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.btn_minimize = QPushButton(self.frame_btns_right)
-        self.btn_minimize.setObjectName(u"btn_minimize")
+        self.pushButton_minimize = QPushButton(self.frame_btns_right)
+        self.pushButton_minimize.setObjectName(u"pushButton_minimize")
         sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.btn_minimize.sizePolicy().hasHeightForWidth())
-        self.btn_minimize.setSizePolicy(sizePolicy1)
-        self.btn_minimize.setMinimumSize(QSize(40, 0))
-        self.btn_minimize.setMaximumSize(QSize(40, 16777215))
-        self.btn_minimize.setStyleSheet(u"QPushButton {	\n"
+        sizePolicy1.setHeightForWidth(self.pushButton_minimize.sizePolicy().hasHeightForWidth())
+        self.pushButton_minimize.setSizePolicy(sizePolicy1)
+        self.pushButton_minimize.setMinimumSize(QSize(40, 0))
+        self.pushButton_minimize.setMaximumSize(QSize(40, 16777215))
+        self.pushButton_minimize.setStyleSheet(u"QPushButton {	\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(52, 59, 72);\n"
+"	background-color: rgb(50, 55, 65);\n"
+"	border-radius : 0px;\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(85, 170, 255);\n"
+"	background-color: rgb(40, 50, 62);\n"
 "}")
         icon = QIcon()
         icon.addFile(os.path.dirname(__file__)+"/icons/cil-window-minimize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_minimize.setIcon(icon)
+        self.pushButton_minimize.setIcon(icon)
 
-        self.horizontalLayout_5.addWidget(self.btn_minimize)
+        self.horizontalLayout_5.addWidget(self.pushButton_minimize)
 
-        self.btn_close = QPushButton(self.frame_btns_right)
-        self.btn_close.setObjectName(u"btn_close")
-        sizePolicy1.setHeightForWidth(self.btn_close.sizePolicy().hasHeightForWidth())
-        self.btn_close.setSizePolicy(sizePolicy1)
-        self.btn_close.setMinimumSize(QSize(40, 0))
-        self.btn_close.setMaximumSize(QSize(40, 16777215))
-        self.btn_close.setStyleSheet(u"QPushButton {	\n"
+        self.pushButton_close = QPushButton(self.frame_btns_right)
+        self.pushButton_close.setObjectName(u"pushButton_close")
+        sizePolicy1.setHeightForWidth(self.pushButton_close.sizePolicy().hasHeightForWidth())
+        self.pushButton_close.setSizePolicy(sizePolicy1)
+        self.pushButton_close.setMinimumSize(QSize(40, 0))
+        self.pushButton_close.setMaximumSize(QSize(40, 16777215))
+        self.pushButton_close.setStyleSheet(u"QPushButton {	\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(52, 59, 72);\n"
-"	border-radius : 10px;\n"
+"	background-color: rgb(50, 55, 65);\n"
+"	border-top-right-radius: 10px;\n"
+"	border-top-left-radius: 0px;\n"
+"	border-bottom-left-radius: 0px;\n"
+"	border-bottom-right-radius: 0px;\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(85, 170, 255);\n"
+"	background-color: rgb(40, 50, 62);\n"
 "}")
         icon1 = QIcon()
         icon1.addFile(os.path.dirname(__file__)+"/icons/cil-x.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_close.setIcon(icon1)
+        self.pushButton_close.setIcon(icon1)
 
-        self.horizontalLayout_5.addWidget(self.btn_close)
+        self.horizontalLayout_5.addWidget(self.pushButton_close)
 
 
         self.horizontalLayout_4.addWidget(self.frame_btns_right, 0, Qt.AlignRight)
@@ -583,7 +589,7 @@ class Ui_SettingsWindowUI(object):
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u"../../../../Km_Rendering_Finished/Github/Km-Rendering-Finished/Km_Rendering_Finished/icons/pack/cil-lightbulb.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(os.path.dirname(__file__)+"/icons/cil-lightbulb.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_OpenPDF.setIcon(icon4)
         self.label_icon_2 = QLabel(self.frame_3)
         self.label_icon_2.setObjectName(u"label_icon_2")
@@ -591,11 +597,11 @@ class Ui_SettingsWindowUI(object):
         self.label_icon_2.setFrameShape(QFrame.NoFrame)
         self.label_icon_2.setPixmap(QPixmap(os.path.dirname(__file__)+"/icons/cil-mouse.png"))
         self.label_icon_2.setScaledContents(False)
-        self.pushButton_OpenPDF_2 = QPushButton(self.frame_3)
-        self.pushButton_OpenPDF_2.setObjectName(u"pushButton_OpenPDF_2")
-        self.pushButton_OpenPDF_2.setGeometry(QRect(394, 110, 130, 31))
-        self.pushButton_OpenPDF_2.setFont(font5)
-        self.pushButton_OpenPDF_2.setStyleSheet(u"QPushButton {\n"
+        self.pushButton_BuyMeACoffee = QPushButton(self.frame_3)
+        self.pushButton_BuyMeACoffee.setObjectName(u"pushButton_BuyMeACoffee")
+        self.pushButton_BuyMeACoffee.setGeometry(QRect(394, 110, 130, 31))
+        self.pushButton_BuyMeACoffee.setFont(font5)
+        self.pushButton_BuyMeACoffee.setStyleSheet(u"QPushButton {\n"
 "	border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "	background-color: rgb(52, 59, 72);\n"
@@ -611,7 +617,7 @@ class Ui_SettingsWindowUI(object):
 "}")
         icon5 = QIcon()
         icon5.addFile(os.path.dirname(__file__)+"/icons/cil-heart.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_OpenPDF_2.setIcon(icon5)
+        self.pushButton_BuyMeACoffee.setIcon(icon5)
         self.label_17 = QLabel(self.frame_3)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(230, 90, 141, 20))
@@ -658,6 +664,20 @@ class Ui_SettingsWindowUI(object):
         self.horizontalLayout_2.setStretch(1, 28)
         self.horizontalLayout_2.setStretch(2, 3)
         SettingsWindowUI.setCentralWidget(self.centralwidget)
+        QWidget.setTabOrder(self.checkBox_zoom_effect, self.checkBox_shake_effect)
+        QWidget.setTabOrder(self.checkBox_shake_effect, self.checkBox_fade_effect)
+        QWidget.setTabOrder(self.checkBox_fade_effect, self.lineEdit_shortcut)
+        QWidget.setTabOrder(self.lineEdit_shortcut, self.horizontalSlider_ZoomScale)
+        QWidget.setTabOrder(self.horizontalSlider_ZoomScale, self.lineEdit_columnn)
+        QWidget.setTabOrder(self.lineEdit_columnn, self.lineEdit_Rows)
+        QWidget.setTabOrder(self.lineEdit_Rows, self.lineEdit_Button_width)
+        QWidget.setTabOrder(self.lineEdit_Button_width, self.lineEdit_ButtonHeight)
+        QWidget.setTabOrder(self.lineEdit_ButtonHeight, self.pushButton_save)
+        QWidget.setTabOrder(self.pushButton_save, self.pushButton_setDefault)
+        QWidget.setTabOrder(self.pushButton_setDefault, self.pushButton_OpenPDF)
+        QWidget.setTabOrder(self.pushButton_OpenPDF, self.pushButton_BuyMeACoffee)
+        QWidget.setTabOrder(self.pushButton_BuyMeACoffee, self.pushButton_minimize)
+        QWidget.setTabOrder(self.pushButton_minimize, self.pushButton_close)
 
         self.retranslateUi(SettingsWindowUI)
 
@@ -670,13 +690,13 @@ class Ui_SettingsWindowUI(object):
         self.label_8.setText("")
         self.label_title_bar_top.setText(QCoreApplication.translate("SettingsWindowUI", u"Km NodeGraph Easy Navigate", None))
 #if QT_CONFIG(tooltip)
-        self.btn_minimize.setToolTip(QCoreApplication.translate("SettingsWindowUI", u"Minimize", None))
+        self.pushButton_minimize.setToolTip(QCoreApplication.translate("SettingsWindowUI", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_minimize.setText("")
+        self.pushButton_minimize.setText("")
 #if QT_CONFIG(tooltip)
-        self.btn_close.setToolTip(QCoreApplication.translate("SettingsWindowUI", u"Close", None))
+        self.pushButton_close.setToolTip(QCoreApplication.translate("SettingsWindowUI", u"Close", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_close.setText("")
+        self.pushButton_close.setText("")
         self.label_ZoomScale.setText(QCoreApplication.translate("SettingsWindowUI", u"1.2", None))
         self.checkBox_fade_effect.setText(QCoreApplication.translate("SettingsWindowUI", u"Main Window Fade In Effect", None))
         self.checkBox_shake_effect.setText(QCoreApplication.translate("SettingsWindowUI", u"Shake Effect", None))
@@ -704,7 +724,7 @@ class Ui_SettingsWindowUI(object):
         self.label_15.setText(QCoreApplication.translate("SettingsWindowUI", u"<strong>Assign Bookmark :</strong> Select a node or backdrop, Then click on an empty bookmark button to assign", None))
         self.pushButton_OpenPDF.setText(QCoreApplication.translate("SettingsWindowUI", u"Open PDF Help", None))
         self.label_icon_2.setText("")
-        self.pushButton_OpenPDF_2.setText(QCoreApplication.translate("SettingsWindowUI", u"Buy Me a Coffee", None))
+        self.pushButton_BuyMeACoffee.setText(QCoreApplication.translate("SettingsWindowUI", u"Buy Me a Coffee", None))
         self.label_17.setText(QCoreApplication.translate("SettingsWindowUI", u"Learn all in 3 minutes", None))
         self.label_18.setText(QCoreApplication.translate("SettingsWindowUI", u"Do you like this tool?", None))
         self.label_plugins_version.setText(QCoreApplication.translate("SettingsWindowUI", u"Km NodeGraph Easy Navigate v2.0", None))

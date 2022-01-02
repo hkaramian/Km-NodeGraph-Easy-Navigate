@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>Hossein Karamian</author>
  <class>SettingsWindowUI</class>
  <widget class="QMainWindow" name="SettingsWindowUI">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>633</width>
-    <height>560</height>
+    <width>635</width>
+    <height>557</height>
    </rect>
   </property>
   <property name="font">
@@ -267,7 +268,9 @@ QSlider::handle:vertical:pressed {
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(40, 43, 50);</string>
+      <string notr="true">background-color: rgb(40, 43, 50);
+border-bottom-left-radius: 1px;
+border-bottom-right-radius: 1px;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -427,7 +430,7 @@ QSlider::handle:vertical:pressed {
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="btn_minimize">
+          <widget class="QPushButton" name="pushButton_minimize">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -455,10 +458,11 @@ QSlider::handle:vertical:pressed {
 	background-color: transparent;
 }
 QPushButton:hover {
-	background-color: rgb(52, 59, 72);
+	background-color: rgb(50, 55, 65);
+	border-radius : 0px;
 }
 QPushButton:pressed {	
-	background-color: rgb(85, 170, 255);
+	background-color: rgb(40, 50, 62);
 }</string>
            </property>
            <property name="text">
@@ -471,7 +475,7 @@ QPushButton:pressed {
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_close">
+          <widget class="QPushButton" name="pushButton_close">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -499,11 +503,14 @@ QPushButton:pressed {
 	background-color: transparent;
 }
 QPushButton:hover {
-	background-color: rgb(52, 59, 72);
-	border-radius : 10px;
+	background-color: rgb(50, 55, 65);
+	border-top-right-radius: 10px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 QPushButton:pressed {	
-	background-color: rgb(85, 170, 255);
+	background-color: rgb(40, 50, 62);
 }</string>
            </property>
            <property name="text">
@@ -1181,7 +1188,7 @@ QPushButton:pressed {
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../../../../Km_Rendering_Finished/Github/Km-Rendering-Finished/Km_Rendering_Finished/icons/pack/cil-lightbulb.png</normaloff>../../../../Km_Rendering_Finished/Github/Km-Rendering-Finished/Km_Rendering_Finished/icons/pack/cil-lightbulb.png</iconset>
+        <normaloff>../Km_NodeGraphEN/icons/cil-lightbulb.png</normaloff>../Km_NodeGraphEN/icons/cil-lightbulb.png</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="label_icon_2">
@@ -1206,7 +1213,7 @@ QPushButton:pressed {
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_OpenPDF_2">
+     <widget class="QPushButton" name="pushButton_BuyMeACoffee">
       <property name="geometry">
        <rect>
         <x>394</x>
@@ -1353,6 +1360,26 @@ QPushButton:pressed {
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_zoom_effect</tabstop>
+  <tabstop>checkBox_shake_effect</tabstop>
+  <tabstop>checkBox_fade_effect</tabstop>
+  <tabstop>lineEdit_shortcut</tabstop>
+  <tabstop>horizontalSlider_ZoomScale</tabstop>
+  <tabstop>lineEdit_columnn</tabstop>
+  <tabstop>lineEdit_Rows</tabstop>
+  <tabstop>lineEdit_Button_width</tabstop>
+  <tabstop>lineEdit_ButtonHeight</tabstop>
+  <tabstop>pushButton_save</tabstop>
+  <tabstop>pushButton_setDefault</tabstop>
+  <tabstop>pushButton_OpenPDF</tabstop>
+  <tabstop>pushButton_BuyMeACoffee</tabstop>
+  <tabstop>pushButton_minimize</tabstop>
+  <tabstop>pushButton_close</tabstop>
+ </tabstops>
+ <includes>
+  <include location="local">test hints</include>
+ </includes>
  <resources>
   <include location="D:/Downloads/Compressed/Simple_PySide_Base-master/files.qrc"/>
  </resources>
