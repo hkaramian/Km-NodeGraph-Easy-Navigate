@@ -69,6 +69,8 @@ Data managment :
 
 # Import Nuke Libraries
 from re import template
+
+import PySide2
 import nuke  
 import nukescripts
 
@@ -234,10 +236,16 @@ class BookmarkButton(QLabel):
         #width , height = 70 , 70
         self.setFixedWidth(width)
         self.setFixedHeight(height)
-        self.setStyleSheet("""background:gray; border-radius: 10px;
-                            color:white ; border:2px red ; font-size:12px;""")
+        self.setStyleSheet("""background:rgb(61, 64, 71); border-radius: 10px;
+                            color:white ; border:2px red ;""")
         self.setText(bookmarkData["title"])
         self.setWordWrap(True)
+        self.RemoveDefaultTextShadow()
+
+        font = QFont()
+        font.setFamily(u"Segoe UI")
+        font.setPointSize(11)
+        self.setFont(font)
 
         # define bookmark shortcut and top menu
         if self.nodeName != "empty" :
@@ -245,13 +253,17 @@ class BookmarkButton(QLabel):
             Km_NGJ = menu.addMenu("KmTools")
             Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+bookmarkData["title"],lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])
 
+    def RemoveDefaultTextShadow(self):
+        """Get Rid of nuke pyside default style that apply shadow for texts"""  
+        self.setStyle(QStyleFactory.create('Windows'))
+
     def enterEvent(self, event): 
-        self.setStyleSheet("""background:orange; border-radius: 10px;
-                            color:white ;font-size:12px;""")
+        self.setStyleSheet("""background:rgb(80, 80, 90); border-radius: 10px;
+                            color:white ;""")
 
     def leaveEvent(self, event):  
-        self.setStyleSheet("""background:gray; border-radius: 10px;
-                            color:white;font-size:12px;""")
+        self.setStyleSheet("""background:rgb(61, 64, 71); border-radius: 10px;
+                            color:white;""")
       
     def JumpToTargetAndShakeNode(self,targetNodeName):
         self.settings = model.Settings().Load()
@@ -377,9 +389,9 @@ class MainMenuWidget(QWidget):
         font.setPointSize(9)
         self.pushButton_Templates.setFont(font)
         self.pushButton_Templates.setStyleSheet(u"QPushButton {\n"
-"	border: 2px solid rgb(128, 146, 177);\n"
+"	border: 2px solid rgb(80, 80, 90);\n"
 "	border-radius: 10px;	\n"
-"	background-color: rgb(128, 146, 177);\n"
+"	background-color: rgb(80, 80, 90);\n"
 "	color: rgb(223, 223, 223);\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -397,9 +409,9 @@ class MainMenuWidget(QWidget):
         self.pushButton_settings.setBaseSize(QSize(0, 0))
         self.pushButton_settings.setFont(font)
         self.pushButton_settings.setStyleSheet(u"QPushButton {\n"
-"	border: 2px solid rgb(128, 146, 177);\n"
+"	border: 2px solid rgb(80, 80, 90);\n"
 "	border-radius: 10px;	\n"
-"	background-color: rgb(128, 146, 177);\n"
+"	background-color: rgb(80, 80, 90);\n"
 "	color: rgb(223, 223, 223);\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -416,9 +428,9 @@ class MainMenuWidget(QWidget):
         self.pushButton_EditBookmarks.setMaximumSize(QSize(28, 28))
         self.pushButton_EditBookmarks.setFont(font)
         self.pushButton_EditBookmarks.setStyleSheet(u"QPushButton {\n"
-"	border: 2px solid rgb(128, 146, 177);\n"
+"	border: 2px solid rgb(80, 80, 90);\n"
 "	border-radius: 12px;	\n"
-"	background-color: rgb(128, 146, 177);\n"
+"	background-color: rgb(80, 80, 90);\n"
 "	color: rgb(223, 223, 223);\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -429,6 +441,9 @@ class MainMenuWidget(QWidget):
         icon2.addFile(os.path.dirname(__file__)+"/icons/cil-menu.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_EditBookmarks.setIcon(icon2)
         self.pushButton_EditBookmarks.setIconSize(QSize(20, 20))
+        self.pushButton_Templates.setToolTip("Bookmark Templates")
+        self.pushButton_EditBookmarks.setToolTip("Edit Bookmarks")
+        self.pushButton_settings.setToolTip("Settings")
         self.horizontalLayout_3.addWidget(self.pushButton_Templates)
         self.horizontalLayout_3.addWidget(self.pushButton_EditBookmarks)
         self.horizontalLayout_3.addWidget(self.pushButton_settings)
@@ -442,6 +457,9 @@ class MainMenuWidget(QWidget):
         self.pushButton_settings.clicked.connect(self.OpenSettingsWindow)
         self.pushButton_Templates.clicked.connect(self.OpenTemplatesWindow)
         self.pushButton_EditBookmarks.clicked.connect(self.OpenEditBookmarksWindow)
+
+        QWidget.setTabOrder(self.pushButton_EditBookmarks,self.pushButton_settings)
+        QWidget.setTabOrder(self.pushButton_settings,self.pushButton_Templates)
 
 
     def OpenSettingsWindow(self) : 
@@ -871,13 +889,21 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         selectedTemplateIndex = self.listWidget_templateList.currentRow()
         selectedTemplate = self.templatesList[selectedTemplateIndex]
         #self.setWindowState(Qt.WindowState.WindowNoState)
-        if nuke.ask("Load \""+selectedTemplate["templateName"]+"\" Bookmark Template ? \n(current bookmarks will removed and replace with this template)"):
+
+        questionString = "Load \""+selectedTemplate["templateName"]+"\" Bookmark Template ? \n(current bookmarks will removed and replace with this template)"
+        self.dialog = QMessageBox()
+        self.dialog.setIcon(QMessageBox.Question)
+        self.dialog.setWindowTitle("Message")
+        self.dialog.setText(questionString)
+        self.dialog.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        self.dialog.setDefaultButton(QMessageBox.Yes)
+        self.dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
+                
+        if self.dialog.exec_() == self.dialog.Yes : 
             model.Bookmarks.ResetBookmarks() # remove current bookmarks in this project
             for bookmarkItem in selectedTemplate["bookmarks"].values() :  
                 model.Bookmarks.AddNewBookmark(bookmarkItem["nodeName"],bookmarkItem["title"],bookmarkItem["index"],bookmarkItem["shortcut"]) 
-            #self.show() #setWindowState(Qt::WindowState::WindowActive); // Bring window to foreground
-            #self.setWindowState(Qt.WindowState.WindowActive) # bring back window to front
-            self.raise_()
+            # self.raise_()
             self.UpdateUI()
             self.listWidget_templateList.setCurrentRow(selectedTemplateIndex)
             updateShortcuts()
@@ -902,12 +928,9 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
     def __init__(self,parent=None):
         super(EditBookmarksWindow, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
-        #self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         ## REMOVE TITLE BAR
-        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint) 
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         ## DROP SHADOW EFFECT
@@ -951,7 +974,7 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.label_credit.setStyle(QStyleFactory.create('Windows'))
         self.label_plugins_version.setStyle(QStyleFactory.create('Windows'))
         self.label_2.setStyle(QStyleFactory.create('Windows'))
-        self.label_7.setStyle(QStyleFactory.create('Windows'))
+        #self.label_7.setStyle(QStyleFactory.create('Windows'))
 
     def BookmarkUpdate(self, item) :
         """cell value change signal function"""
@@ -1000,7 +1023,15 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.raise_()
 
     def createBookmarksFromBackdrops(self):
-        if nuke.ask("Create Bookmarks from backdrops ? \nAll the bookmarks in this project will removed"):
+        
+        self.dialog = QMessageBox()
+        self.dialog.setIcon(QMessageBox.Question)
+        self.dialog.setWindowTitle("Message")
+        self.dialog.setText("Create Bookmarks from backdrops ? \nAll the bookmarks in this project will removed")
+        self.dialog.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        self.dialog.setDefaultButton(QMessageBox.Yes)
+        self.dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
+        if self.dialog.exec_() == self.dialog.Yes : 
             model.Bookmarks.ResetBookmarks()
             allBackdrops = nuke.allNodes("BackdropNode")
             counter = 0
@@ -1014,7 +1045,7 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
                 model.Bookmarks.AddNewBookmark(bookmarkNodeName,bookmarkTitle,bookmarkIndex,bookmarkShortcut)
                 counter += 1
             self.UpdateUI()
-            self.raise_()
+            # self.raise_()
 
     def removeABookmark(self) : 
         selectedRow = self.tableWidget_BookmarksList.currentRow()
@@ -1062,10 +1093,16 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         
         
     def resetBookmarks(self):
-        if nuke.ask("Remove all bookmarks in the current project ? "):
+        self.dialog = QMessageBox()
+        self.dialog.setIcon(QMessageBox.Question)
+        self.dialog.setWindowTitle("Message")
+        self.dialog.setText("Remove all bookmarks in the current project ? ")
+        self.dialog.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        self.dialog.setDefaultButton(QMessageBox.Yes)
+        self.dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
+        if self.dialog.exec_() == self.dialog.Yes : 
             model.Bookmarks.ResetBookmarks()
             self.UpdateUI()
-        self.raise_()
 
 
     # for adding window drag to title bar

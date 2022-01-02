@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'panel_v02 - Bookmarks ListKFdroA.ui'
+## Form generated from reading UI file 'panel_v02 - Bookmarks ListkrxGBA.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
@@ -21,12 +21,12 @@ class Ui_EditBookmarksWindowUI(object):
     def setupUi(self, EditBookmarksWindowUI):
         if not EditBookmarksWindowUI.objectName():
             EditBookmarksWindowUI.setObjectName(u"EditBookmarksWindowUI")
-        EditBookmarksWindowUI.resize(641, 610)
+        EditBookmarksWindowUI.resize(633, 545)
         self.centralwidget = QWidget(EditBookmarksWindowUI)
         self.centralwidget.setObjectName(u"centralwidget")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(10, 10, 611, 591))
+        self.frame.setGeometry(QRect(10, 10, 611, 521))
         self.frame.setStyleSheet(u"QLabel {\n"
 "color: rgb(223, 223, 223);\n"
 "}\n"
@@ -375,7 +375,7 @@ class Ui_EditBookmarksWindowUI(object):
 
         self.frame_2 = QFrame(self.frame)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(20, 59, 571, 411))
+        self.frame_2.setGeometry(QRect(20, 59, 571, 425))
         self.frame_2.setStyleSheet(u"QFrame {\n"
 "background-color: rgb(51, 54, 63);\n"
 "border-radius: 5px;\n"
@@ -427,7 +427,7 @@ class Ui_EditBookmarksWindowUI(object):
         __qtablewidgetitem11 = QTableWidgetItem()
         self.tableWidget_BookmarksList.setItem(1, 2, __qtablewidgetitem11)
         self.tableWidget_BookmarksList.setObjectName(u"tableWidget_BookmarksList")
-        self.tableWidget_BookmarksList.setGeometry(QRect(10, 33, 551, 321))
+        self.tableWidget_BookmarksList.setGeometry(QRect(10, 33, 551, 331))
         self.tableWidget_BookmarksList.setStyleSheet(u"QTableWidget {	\n"
 "	background-color: rgb(51, 54, 63);\n"
 "	padding: 10px;\n"
@@ -507,7 +507,7 @@ class Ui_EditBookmarksWindowUI(object):
         self.tableWidget_BookmarksList.verticalHeader().setStretchLastSection(False)
         self.horizontalLayoutWidget = QWidget(self.frame_2)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(0, 360, 561, 41))
+        self.horizontalLayoutWidget.setGeometry(QRect(0, 370, 561, 41))
         self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -670,34 +670,12 @@ class Ui_EditBookmarksWindowUI(object):
 
         self.horizontalLayout.addWidget(self.pushButton_reset)
 
-        self.frame_3 = QFrame(self.frame)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setGeometry(QRect(20, 490, 571, 61))
-        self.frame_3.setStyleSheet(u"QFrame {\n"
-"background-color:rgb(51, 54, 63);\n"
-"border-radius: 5px;\n"
-"}\n"
-"")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.label_7 = QLabel(self.frame_3)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(-10, 2, 571, 31))
-        self.label_7.setFont(font1)
-        self.label_7.setAlignment(Qt.AlignCenter)
-        self.label_14 = QLabel(self.frame_3)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(30, 30, 227, 19))
-        self.label_14.setFont(font2)
-        self.label_icon_2 = QLabel(self.frame_3)
-        self.label_icon_2.setObjectName(u"label_icon_2")
-        self.label_icon_2.setGeometry(QRect(340, 20, 31, 41))
-        self.label_icon_2.setFrameShape(QFrame.NoFrame)
-        self.label_icon_2.setPixmap(QPixmap(os.path.dirname(__file__)+"/icons/cil-mouse.png"))
-        self.label_icon_2.setScaledContents(False)
+        self.checkBox_for_fake_focus = QCheckBox(self.frame_2)
+        self.checkBox_for_fake_focus.setObjectName(u"checkBox_for_fake_focus")
+        self.checkBox_for_fake_focus.setGeometry(QRect(70, 10, 0, 0))
         self.layoutWidget_2 = QWidget(self.frame)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(20, 554, 571, 36))
+        self.layoutWidget_2.setGeometry(QRect(20, 483, 571, 36))
         self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget_2)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -730,7 +708,19 @@ class Ui_EditBookmarksWindowUI(object):
         self.horizontalLayout_3.setStretch(0, 3)
         self.horizontalLayout_3.setStretch(1, 28)
         self.horizontalLayout_3.setStretch(2, 3)
+        self.frame_top_btns.raise_()
+        self.layoutWidget_2.raise_()
+        self.frame_2.raise_()
         EditBookmarksWindowUI.setCentralWidget(self.centralwidget)
+        QWidget.setTabOrder(self.checkBox_for_fake_focus, self.pushButton_minimize)
+        QWidget.setTabOrder(self.pushButton_minimize, self.pushButton_shiftUp)
+        QWidget.setTabOrder(self.pushButton_shiftUp, self.pushButton_shiftDown)
+        QWidget.setTabOrder(self.pushButton_shiftDown, self.pushButton_AddBookmark)
+        QWidget.setTabOrder(self.pushButton_AddBookmark, self.pushButton_removeItem)
+        QWidget.setTabOrder(self.pushButton_removeItem, self.pushButton_createFromBackdrops)
+        QWidget.setTabOrder(self.pushButton_createFromBackdrops, self.pushButton_reset)
+        QWidget.setTabOrder(self.pushButton_reset, self.pushButton_close)
+        QWidget.setTabOrder(self.pushButton_close, self.tableWidget_BookmarksList)
 
         self.retranslateUi(EditBookmarksWindowUI)
 
@@ -788,7 +778,7 @@ class Ui_EditBookmarksWindowUI(object):
 #endif // QT_CONFIG(tooltip)
         self.pushButton_shiftDown.setText("")
 #if QT_CONFIG(tooltip)
-        self.pushButton_AddBookmark.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Set Selected Node to Selected Row(Index)", None))
+        self.pushButton_AddBookmark.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Assign Selected Node to Selected Bookmark", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_AddBookmark.setText("")
 #if QT_CONFIG(tooltip)
@@ -803,9 +793,7 @@ class Ui_EditBookmarksWindowUI(object):
         self.pushButton_reset.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Remove (Set Empty) All Bookmarks", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_reset.setText("")
-        self.label_7.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Tips", None))
-        self.label_14.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"<strong>Middle Button :</strong>   Edit", None))
-        self.label_icon_2.setText("")
+        self.checkBox_for_fake_focus.setText("")
         self.label_plugins_version.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Km NodeGraph Easy Navigate v2.0", None))
         self.label_credit.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"By Hossein Karamian", None))
     # retranslateUi

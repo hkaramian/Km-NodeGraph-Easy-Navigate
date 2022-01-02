@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'panel_v02 - TemplatesmWAWNR.ui'
+## Form generated from reading UI file 'panel_v02 - TemplatesyHDgQf.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
@@ -442,6 +442,9 @@ class Ui_TemplatesWindowUI(object):
         icon3 = QIcon()
         icon3.addFile(os.path.dirname(__file__)+"/icons/cil-library-add.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_load.setIcon(icon3)
+        self.checkBox_for_fake_focus = QCheckBox(self.frame_2)
+        self.checkBox_for_fake_focus.setObjectName(u"checkBox_for_fake_focus")
+        self.checkBox_for_fake_focus.setGeometry(QRect(20, 10, 0, 17))
         self.layoutWidget = QWidget(self.frame)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(20, 353, 841, 36))
@@ -551,6 +554,15 @@ class Ui_TemplatesWindowUI(object):
         self.frame_4.raise_()
         self.frame_2.raise_()
         TemplatesWindowUI.setCentralWidget(self.centralwidget)
+        QWidget.setTabOrder(self.checkBox_for_fake_focus, self.pushButton_remove)
+        QWidget.setTabOrder(self.pushButton_remove, self.listWidget_templateItems)
+        QWidget.setTabOrder(self.listWidget_templateItems, self.listWidget_templateList)
+        QWidget.setTabOrder(self.listWidget_templateList, self.pushButton_load)
+        QWidget.setTabOrder(self.pushButton_load, self.listWidget_newTemplateItems)
+        QWidget.setTabOrder(self.listWidget_newTemplateItems, self.lineEdit_templateName)
+        QWidget.setTabOrder(self.lineEdit_templateName, self.pushButton_add)
+        QWidget.setTabOrder(self.pushButton_add, self.pushButton_close)
+        QWidget.setTabOrder(self.pushButton_close, self.pushButton_minimize)
 
         self.retranslateUi(TemplatesWindowUI)
 
@@ -605,6 +617,7 @@ class Ui_TemplatesWindowUI(object):
         self.listWidget_templateItems.setSortingEnabled(__sortingEnabled1)
 
         self.pushButton_load.setText(QCoreApplication.translate("TemplatesWindowUI", u"Load", None))
+        self.checkBox_for_fake_focus.setText(QCoreApplication.translate("TemplatesWindowUI", u"CheckBox", None))
         self.label_plugins_version.setText(QCoreApplication.translate("TemplatesWindowUI", u"Km NodeGraph Easy Navigate v2.0", None))
         self.label_credit.setText(QCoreApplication.translate("TemplatesWindowUI", u"By Hossein Karamian", None))
         self.label_18.setText(QCoreApplication.translate("TemplatesWindowUI", u"Add New Template", None))

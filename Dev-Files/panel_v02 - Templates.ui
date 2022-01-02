@@ -728,6 +728,19 @@ QPushButton:pressed {
         <normaloff>../Km_NodeGraphEN/icons/cil-library-add.png</normaloff>../Km_NodeGraphEN/icons/cil-library-add.png</iconset>
       </property>
      </widget>
+     <widget class="QCheckBox" name="checkBox_for_fake_focus">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>0</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CheckBox</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
@@ -976,6 +989,18 @@ QPushButton:pressed {
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_for_fake_focus</tabstop>
+  <tabstop>pushButton_remove</tabstop>
+  <tabstop>listWidget_templateItems</tabstop>
+  <tabstop>listWidget_templateList</tabstop>
+  <tabstop>pushButton_load</tabstop>
+  <tabstop>listWidget_newTemplateItems</tabstop>
+  <tabstop>lineEdit_templateName</tabstop>
+  <tabstop>pushButton_add</tabstop>
+  <tabstop>pushButton_close</tabstop>
+  <tabstop>pushButton_minimize</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

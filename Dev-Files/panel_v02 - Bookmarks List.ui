@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
-    <height>610</height>
+    <width>633</width>
+    <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>611</width>
-      <height>591</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -525,7 +525,7 @@ QPushButton:pressed {
        <x>20</x>
        <y>59</y>
        <width>571</width>
-       <height>411</height>
+       <height>425</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -569,7 +569,7 @@ border-radius: 5px;
         <x>10</x>
         <y>33</y>
         <width>551</width>
-        <height>321</height>
+        <height>331</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -770,7 +770,7 @@ QHeaderView::section:vertical
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>360</y>
+        <y>370</y>
         <width>561</width>
         <height>41</height>
        </rect>
@@ -905,7 +905,7 @@ QPushButton:pressed {
           </font>
          </property>
          <property name="toolTip">
-          <string>Set Selected Node to Selected Row(Index)</string>
+          <string>Assign Selected Node to Selected Bookmark</string>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
@@ -1102,89 +1102,17 @@ QPushButton:pressed {
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QFrame" name="frame_3">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>490</y>
-       <width>571</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QFrame {
-background-color:rgb(51, 54, 63);
-border-radius: 5px;
-}
-</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="label_7">
+     <widget class="QCheckBox" name="checkBox_for_fake_focus">
       <property name="geometry">
        <rect>
-        <x>-10</x>
-        <y>2</y>
-        <width>571</width>
-        <height>31</height>
+        <x>70</x>
+        <y>10</y>
+        <width>0</width>
+        <height>0</height>
        </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Semibold</family>
-        <pointsize>13</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Tips</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_14">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>30</y>
-        <width>227</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>&lt;strong&gt;Middle Button :&lt;/strong&gt;   Edit</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_icon_2">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>20</y>
-        <width>31</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
       </property>
       <property name="text">
        <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>../Km_NodeGraphEN/icons/cil-mouse.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
       </property>
      </widget>
     </widget>
@@ -1192,7 +1120,7 @@ border-radius: 5px;
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>554</y>
+       <y>483</y>
        <width>571</width>
        <height>36</height>
       </rect>
@@ -1250,9 +1178,24 @@ border-radius: 5px;
       </item>
      </layout>
     </widget>
+    <zorder>frame_top_btns</zorder>
+    <zorder>layoutWidget_2</zorder>
+    <zorder>frame_2</zorder>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_for_fake_focus</tabstop>
+  <tabstop>pushButton_minimize</tabstop>
+  <tabstop>pushButton_shiftUp</tabstop>
+  <tabstop>pushButton_shiftDown</tabstop>
+  <tabstop>pushButton_AddBookmark</tabstop>
+  <tabstop>pushButton_removeItem</tabstop>
+  <tabstop>pushButton_createFromBackdrops</tabstop>
+  <tabstop>pushButton_reset</tabstop>
+  <tabstop>pushButton_close</tabstop>
+  <tabstop>tableWidget_BookmarksList</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
