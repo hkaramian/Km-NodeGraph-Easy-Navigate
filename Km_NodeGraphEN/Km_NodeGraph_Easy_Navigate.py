@@ -77,6 +77,7 @@ import nukescripts
 # Import built-in Libraries
 import math
 import os
+import platform
 import threading
 import time
 import subprocess
@@ -598,7 +599,10 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.pushButton_minimize.clicked.connect(self.showMinimized)
         self.pushButton_close.clicked.connect(self.close)
 
-
+        # for linux , set window position to center 
+        centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
+        centerY = int(QDesktopWidget().screenGeometry(-1).height()/2.0 - self.height()/2.0)
+        self.move(centerX,centerY)
         
         self.updateUI()
 
@@ -706,7 +710,15 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.updateUI()
 
     def open_documentation(self):
-        subprocess.Popen(os.path.dirname(__file__)+"/UserGuide.pdf",shell=True)
+        path = os.path.dirname(__file__)+"/UserGuide.pdf"
+        operatingSystem = platform.system()
+        if os.path.exists(path):
+            if operatingSystem == "Windows":
+                os.startfile(path)
+            elif operatingSystem == "Darwin":
+                subprocess.Popen(["open", path])
+            else:
+                subprocess.Popen(["xdg-open", path])
 
 
 
@@ -775,9 +787,13 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         self.pushButton_add.clicked.connect(self.AddTemplate)
         # self.comboBox_TemplateOverride.currentIndexChanged.connect(self.ComboBoxTemplateOverrideChange)
         # self.checkBox_TemplateOverride.stateChanged['int'].connect(self.CheckBoxTemplateOverrideChange)
-
         self.listWidget_templateList.currentItemChanged.connect(self.selectedTemplateItemsListUpdateUI)
 
+
+        # for linux , set window position to center 
+        centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
+        centerY = int(QDesktopWidget().screenGeometry(-1).height()/2.0 - self.height()/2.0)
+        self.move(centerX,centerY)
 
         checkBoxStyle = 'QCheckBox::indicator:checked {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-check-alt.png);}'
         # self.checkBox_TemplateOverride.setStyleSheet(checkBoxStyle)
@@ -962,6 +978,11 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.pushButton_minimize.clicked.connect(self.showMinimized)
         self.pushButton_close.clicked.connect(self.close)
         self.tableWidget_BookmarksList.itemChanged.connect(self.BookmarkUpdate)
+
+        # for linux , set window position to center 
+        centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
+        centerY = int(QDesktopWidget().screenGeometry(-1).height()/2.0 - self.height()/2.0)
+        self.move(centerX,centerY)
 
         # UpdateUI
         self.UpdateUI()
