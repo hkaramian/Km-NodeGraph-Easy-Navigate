@@ -134,11 +134,6 @@ class MainWindow(QWidget):
         columnCounter, rowCounter = 0, 0
 
         allBookmarksData = model.Bookmarks.Load()
-        # Template Global Override 
-        # if self.settings["templateGlobalOverride"] == "Enable" :
-        #     templateFileName = self.settings["globalOverrideTemplateFileName"]
-        #     if model.BookmarkTemplates.GetATemplateData(templateFileName) :
-        #         allBookmarksData = model.BookmarkTemplates.GetATemplateData(templateFileName)["bookmarks"].values()
 
         for index in range(0, numberOfBoomarks):
             isEmpty = True
@@ -152,8 +147,6 @@ class MainWindow(QWidget):
                 bookmarkData = {"nodeName": "empty","title": "", "index": index, "shortcut" : ""}
                 bookmarkButtonInstance = BookmarkButton(bookmarkData,self,boomarkButtonWidth,bookmarkButtonHeight)
                 bookmarksLayout.addWidget(bookmarkButtonInstance, rowCounter, columnCounter)
-            #print "row : " + str(row_counter)
-            #print "column : "+str(column_counter)
             if columnCounter > (bookmarksGridColumns - 2) :
                 rowCounter += 1
                 columnCounter = 0
@@ -195,7 +188,6 @@ class MainWindow(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint)
         # make sure the widgets closes when it loses focus
         self.installEventFilter(self)
-        #self.input.setFocus()
 
     def keyPressEvent(self, event):  # pylint: disable=invalid-name
         """Route key press event to certain behaviors.
@@ -551,17 +543,9 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         super(SettingsWindow, self).__init__()
         self.setupUi(self)
 
-        #self.setWindowFlags(Qt.WindowStaysOnTopHint)
-
         ## REMOVE TITLE BAR
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-
-        # opacity
-        # self.op_effect=QGraphicsOpacityEffect(self)
-        # self.opacity_value = 0.92
-        # self.op_effect.setOpacity(self.opacity_value)
-        # self.setGraphicsEffect(self.op_effect)
 
         ## DROP SHADOW EFFECT
         self.shadow = QGraphicsDropShadowEffect(self)
@@ -575,6 +559,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.RemoveDefaultTextShadow()
 
         self.settings = model.Settings().Load()
+
         # Setup UI
         self.horizontalSlider_ZoomScale.setMinimum(5) 
         self.horizontalSlider_ZoomScale.setMaximum(30)
@@ -586,11 +571,10 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.checkBox_zoom_effect.setStyleSheet(checkBoxStyle)
         self.checkBox_shake_effect.setStyleSheet(checkBoxStyle)
         self.checkBox_fade_effect.setStyleSheet(checkBoxStyle)
+
         # adding window drag to title bar
         self.AddWindowDragToTitleBar()
         
-
-
         # Signals
         self.pushButton_save.clicked.connect(self.applySettings)
         self.pushButton_setDefault.clicked.connect(self.SetDefault)
@@ -638,7 +622,6 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         webbrowser.open(url)
 
     def updateUI(self):
-
         if self.settings["shakeEffect"] == "Enable" :
             self.checkBox_shake_effect.setChecked(True)
         else :
@@ -710,7 +693,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.updateUI()
 
     def open_documentation(self):
-        path = os.path.dirname(__file__)+"/UserGuide.pdf"
+        path = os.path.dirname(__file__)+"/Help-UserGuide/UserGuide.pdf"
         operatingSystem = platform.system()
         if os.path.exists(path):
             if operatingSystem == "Windows":
@@ -728,8 +711,6 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
     def __init__(self,parent=None):
         super(TemplatesWindow, self).__init__(parent)
         self.setupUi(self)
-        #self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
-        #self.setWindowFlags(Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint) # disable resize
 
         # remove text shadows
         self.RemoveDefaultTextShadow()
@@ -751,33 +732,9 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         
         self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
-        #self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         # UpdateUI
         self.UpdateUI()
-
-        
-        #qomboBoxStyle = 'QComboBox::drop-down {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-arrow-bottom.png);}'
-#         self.comboBox_TemplateOverride.setStyleSheet(u"QComboBox{\n"
-# "	background-color:rgb(40, 43, 50);\n"
-# "	border-radius: 5px;\n"
-# "	border: 2px solid rgb(40, 43, 50);\n"
-# "	padding: 5px;\n"
-# "	padding-left: 10px;\n"
-# "}\n"
-# "QComboBox::drop-down {\n"
-# "	subcontrol-origin: padding;\n"
-# "	subcontrol-position: top right;\n"
-# "	width: 25px; \n"
-# "	border-left-width: 3px;\n"
-# "	border-left-color: rgba(39, 44, 54, 150);\n"
-# "	border-left-style: solid;\n"
-# "	border-top-right-radius: 3px;\n"
-# "	border-bottom-right-radius: 3px;	\n"
-# "	background-image: url("+os.path.dirname(__file__).replace(os.sep,'/')+"/icons/cil-arrow-bottom.png);\n"
-# "	background-position: center;\n"
-# "	background-repeat: no-reperat;\n"
-# " }")
 
         # Signals
         self.pushButton_minimize.clicked.connect(self.showMinimized)
@@ -785,10 +742,7 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         self.pushButton_remove.clicked.connect(self.removeTemplate)
         self.pushButton_load.clicked.connect(self.LoadTemplate)
         self.pushButton_add.clicked.connect(self.AddTemplate)
-        # self.comboBox_TemplateOverride.currentIndexChanged.connect(self.ComboBoxTemplateOverrideChange)
-        # self.checkBox_TemplateOverride.stateChanged['int'].connect(self.CheckBoxTemplateOverrideChange)
         self.listWidget_templateList.currentItemChanged.connect(self.selectedTemplateItemsListUpdateUI)
-
 
         # for linux , set window position to center 
         centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
@@ -796,8 +750,6 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         self.move(centerX,centerY)
 
         checkBoxStyle = 'QCheckBox::indicator:checked {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-check-alt.png);}'
-        # self.checkBox_TemplateOverride.setStyleSheet(checkBoxStyle)
-
 
 
     def RemoveDefaultTextShadow(self):
@@ -840,45 +792,11 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
             itemCounter += 1
 
         # templates list
-        # self.overrideTemplateIndex = -1 # if override template file not exits
         itemCounter = 0
         for templateItem in self.templatesList : 
             QListWidgetItem(self.listWidget_templateList)
             self.listWidget_templateList.item(itemCounter).setText(templateItem["templateName"])
-            # self.comboBox_TemplateOverride.addItem(templateItem["templateName"])
-            # if templateItem["fileName"] == self.settings["globalOverrideTemplateFileName"] : 
-            #     self.overrideTemplateIndex = itemCounter
             itemCounter += 1
-  
-        # if self.overrideTemplateIndex != -1 :
-        #     self.comboBox_TemplateOverride.setCurrentIndex(self.overrideTemplateIndex)
-
-        # if self.settings["templateGlobalOverride"] == "Enable" :
-        #     self.checkBox_TemplateOverride.setChecked(True)
-        #     self.comboBox_TemplateOverride.setEnabled(True)
-        # else :
-        #     self.checkBox_TemplateOverride.setChecked(False)
-        #     self.comboBox_TemplateOverride.setEnabled(False)
-
-
-        
-        
-    # def CheckBoxTemplateOverrideChange(self):
-    #     if self.checkBox_TemplateOverride.isChecked():
-    #         self.comboBox_TemplateOverride.setEnabled(True)
-    #         self.settings["templateGlobalOverride"] = "Enable"
-    #     else : 
-    #         self.comboBox_TemplateOverride.setEnabled(False)
-    #         self.settings["templateGlobalOverride"] = "Disable"
-    #     if self.comboBox_TemplateOverride.count != 0 :
-    #         currentIndex = self.comboBox_TemplateOverride.currentIndex()
-    #         self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
-    #     model.Settings.Save(self.settings)
-
-    # def ComboBoxTemplateOverrideChange(self):
-    #     currentIndex = self.comboBox_TemplateOverride.currentIndex()
-    #     self.settings["globalOverrideTemplateFileName"] = self.templatesList[currentIndex]["fileName"]
-    #     model.Settings.Save(self.settings)       
         
     def selectedTemplateItemsListUpdateUI(self):
         self.listWidget_templateItems.clear() 
@@ -904,7 +822,6 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         if self.templatesList == [] : return True
         selectedTemplateIndex = self.listWidget_templateList.currentRow()
         selectedTemplate = self.templatesList[selectedTemplateIndex]
-        #self.setWindowState(Qt.WindowState.WindowNoState)
 
         questionString = "Load \""+selectedTemplate["templateName"]+"\" Bookmark Template ? \n(current bookmarks will removed and replace with this template)"
         self.dialog = QMessageBox()
@@ -967,7 +884,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         # remove text shadows
         self.RemoveDefaultTextShadow()
 
-
         # Signals
         self.pushButton_reset.clicked.connect(self.resetBookmarks)
         self.pushButton_removeItem.clicked.connect(self.removeABookmark)
@@ -986,7 +902,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
 
         # UpdateUI
         self.UpdateUI()
-        #self.listWidget_templateList.currentItemChanged.connect(self.selectedTemplateItemsListUpdateUI) 
 
 
     def RemoveDefaultTextShadow(self):
@@ -995,7 +910,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.label_credit.setStyle(QStyleFactory.create('Windows'))
         self.label_plugins_version.setStyle(QStyleFactory.create('Windows'))
         self.label_2.setStyle(QStyleFactory.create('Windows'))
-        #self.label_7.setStyle(QStyleFactory.create('Windows'))
 
     def BookmarkUpdate(self, item) :
         """cell value change signal function"""
@@ -1012,13 +926,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
 
     def AddNewBookmark(self):
         if nuke.selectedNodes() == [] :
-            # self.msg=QMessageBox()
-            # self.msg.setIcon(QMessageBox.Information)
-            # self.msg.setText("This is Message")
-            # self.msg.setInformativeText("Are You Sure?")
-            # self.msg.show()
-            # self.msg.raise_()
-            # self.msg.setWindowFlags(Qt.WindowStaysOnTopHint)
             return True
 
         selectedRow = self.tableWidget_BookmarksList.currentRow()
@@ -1044,7 +951,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.raise_()
 
     def createBookmarksFromBackdrops(self):
-        
         self.dialog = QMessageBox()
         self.dialog.setIcon(QMessageBox.Question)
         self.dialog.setWindowTitle("Message")
@@ -1066,7 +972,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
                 model.Bookmarks.AddNewBookmark(bookmarkNodeName,bookmarkTitle,bookmarkIndex,bookmarkShortcut)
                 counter += 1
             self.UpdateUI()
-            # self.raise_()
 
     def removeABookmark(self) : 
         selectedRow = self.tableWidget_BookmarksList.currentRow()
@@ -1124,7 +1029,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         if self.dialog.exec_() == self.dialog.Yes : 
             model.Bookmarks.ResetBookmarks()
             self.UpdateUI()
-
 
     # for adding window drag to title bar
     def mousePressEvent(self, event ) :
