@@ -344,7 +344,7 @@ border-bottom-right-radius: 1px;</string>
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
             <pixmap>../Km_NodeGraphEN/icons/cil-menu.png</pixmap>
@@ -375,7 +375,7 @@ border-bottom-right-radius: 1px;</string>
 </string>
            </property>
            <property name="text">
-            <string>Km NodeGraph Easy Navigate</string>
+            <string notr="true">Km NodeGraph Easy Navigate</string>
            </property>
            <property name="margin">
             <number>5</number>
@@ -458,7 +458,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -506,7 +506,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -557,7 +557,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Edit Bookmarks</string>
+       <string notr="true">Edit Bookmarks</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -816,7 +816,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -870,7 +870,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -924,7 +924,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -978,7 +978,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -1032,7 +1032,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -1086,7 +1086,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset>
@@ -1137,7 +1137,7 @@ QPushButton:pressed {
          <string notr="true">color: rgb(200, 200, 200);</string>
         </property>
         <property name="text">
-         <string>Km NodeGraph Easy Navigate v2.0</string>
+         <string notr="true">Km NodeGraph Easy Navigate v2.0</string>
         </property>
        </widget>
       </item>
@@ -1167,7 +1167,7 @@ QPushButton:pressed {
            <string notr="true">color: rgb(200, 200, 200);</string>
           </property>
           <property name="text">
-           <string>By Hossein Karamian</string>
+           <string notr="true">By Hossein Karamian</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

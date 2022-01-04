@@ -352,7 +352,7 @@ border-bottom-right-radius: 1px;</string>
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
             <pixmap>../Km_NodeGraphEN/icons/cil-settings.png</pixmap>
@@ -383,7 +383,7 @@ border-bottom-right-radius: 1px;</string>
 </string>
            </property>
            <property name="text">
-            <string>Km NodeGraph Easy Navigate</string>
+            <string notr="true">Km NodeGraph Easy Navigate</string>
            </property>
            <property name="margin">
             <number>5</number>
@@ -466,7 +466,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -514,7 +514,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -564,7 +564,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>1.2</string>
+       <string notr="true">1.2</string>
       </property>
      </widget>
      <widget class="QCheckBox" name="checkBox_fade_effect">
@@ -582,7 +582,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Main Window Fade In Effect</string>
+       <string notr="true">Main Window Fade In Effect</string>
       </property>
       <property name="checked">
        <bool>true</bool>
@@ -603,7 +603,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Shake Effect</string>
+       <string notr="true">Shake Effect</string>
       </property>
       <property name="checked">
        <bool>true</bool>
@@ -624,7 +624,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Zoom Effect</string>
+       <string notr="true">Zoom Effect</string>
       </property>
      </widget>
      <widget class="QSlider" name="horizontalSlider_ZoomScale">
@@ -673,7 +673,7 @@ border-radius: 5px;
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>shift+e</string>
+       <string notr="true">shift+e</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -694,7 +694,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Shortcut</string>
+       <string notr="true">Shortcut</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
@@ -712,7 +712,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Node Graph Zoom Scale</string>
+       <string notr="true">Node Graph Zoom Scale</string>
       </property>
      </widget>
      <widget class="Line" name="line">
@@ -747,7 +747,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>Button Height :</string>
+       <string notr="true">Button Height :</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_columnn">
@@ -765,7 +765,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>3</string>
+       <string notr="true">3</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -786,7 +786,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>Columns : </string>
+       <string notr="true">Columns : </string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_Rows">
@@ -804,7 +804,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>3</string>
+       <string notr="true">3</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -825,7 +825,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>Button Width : </string>
+       <string notr="true">Button Width : </string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_Button_width">
@@ -843,7 +843,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>110</string>
+       <string notr="true">110</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -865,7 +865,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>Bookmarks Grid </string>
+       <string notr="true">Bookmarks Grid </string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_ButtonHeight">
@@ -883,7 +883,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>50</string>
+       <string notr="true">50</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -904,7 +904,7 @@ width : 2px</string>
        </font>
       </property>
       <property name="text">
-       <string>Rows :</string>
+       <string notr="true">Rows :</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_save">
@@ -941,7 +941,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>  Save</string>
+       <string notr="true">  Save</string>
       </property>
       <property name="icon">
        <iconset>
@@ -982,7 +982,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Reset</string>
+       <string notr="true">Reset</string>
       </property>
       <property name="icon">
        <iconset>
@@ -1005,7 +1005,7 @@ QPushButton:pressed {
        </font>
       </property>
       <property name="text">
-       <string>Settings</string>
+       <string notr="true">Settings</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1050,7 +1050,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Tips</string>
+       <string notr="true">Tips</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1071,7 +1071,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>&lt;strong&gt;Middle Button :&lt;/strong&gt;   Edit</string>
+       <string notr="true">&lt;strong&gt;Middle Button :&lt;/strong&gt;   Edit</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_9">
@@ -1089,7 +1089,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>&lt;strong&gt;Left Button    :  &lt;/strong&gt;Jump to Bookmark</string>
+       <string notr="true">&lt;strong&gt;Left Button    :  &lt;/strong&gt;Jump to Bookmark</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
@@ -1107,7 +1107,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>Assign New Bookmark</string>
+       <string notr="true">Assign New Bookmark</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
@@ -1125,7 +1125,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>&lt;strong&gt;Right Button  : &lt;/strong&gt;   Remove</string>
+       <string notr="true">&lt;strong&gt;Right Button  : &lt;/strong&gt;   Remove</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_15">
@@ -1143,7 +1143,7 @@ border-radius: 5px;
        </font>
       </property>
       <property name="text">
-       <string>&lt;strong&gt;Assign Bookmark :&lt;/strong&gt; Select a node or backdrop, Then click on an empty bookmark button to assign</string>
+       <string notr="true">&lt;strong&gt;Assign Bookmark :&lt;/strong&gt; Select a node or backdrop, Then click on an empty bookmark button to assign</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1184,7 +1184,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Open PDF Help</string>
+       <string notr="true">Open PDF Help</string>
       </property>
       <property name="icon">
        <iconset>
@@ -1204,7 +1204,7 @@ QPushButton:pressed {
        <enum>QFrame::NoFrame</enum>
       </property>
       <property name="text">
-       <string/>
+       <string notr="true"/>
       </property>
       <property name="pixmap">
        <pixmap>../Km_NodeGraphEN/icons/cil-mouse.png</pixmap>
@@ -1245,7 +1245,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Buy Me a Coffee</string>
+       <string notr="true">Buy Me a Coffee</string>
       </property>
       <property name="icon">
        <iconset>
@@ -1267,7 +1267,7 @@ QPushButton:pressed {
        </font>
       </property>
       <property name="text">
-       <string>Learn all in 3 minutes</string>
+       <string notr="true">Learn all in 3 minutes</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1288,7 +1288,7 @@ QPushButton:pressed {
        </font>
       </property>
       <property name="text">
-       <string>Do you like this tool?</string>
+       <string notr="true">Do you like this tool?</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1316,7 +1316,7 @@ QPushButton:pressed {
          <string notr="true">color: rgb(200, 200, 200);</string>
         </property>
         <property name="text">
-         <string>Km NodeGraph Easy Navigate v2.0</string>
+         <string notr="true">Km NodeGraph Easy Navigate v2.0</string>
         </property>
        </widget>
       </item>
@@ -1346,7 +1346,7 @@ QPushButton:pressed {
            <string notr="true">color: rgb(200, 200, 200);</string>
           </property>
           <property name="text">
-           <string>By Hossein Karamian</string>
+           <string notr="true">By Hossein Karamian</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'panel_v02 - TemplatesyHDgQf.ui'
+## Form generated from reading UI file 'panel_v02 - TemplatesbXjwBY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
+# Pyside Library Import (pyside and pyside 2)  : pyside for nuke10.5 and older , pyside2 for nuke 11.0 and newer
+from PysideImport import *
 
 import os
 
@@ -248,6 +244,7 @@ class Ui_TemplatesWindowUI(object):
         self.label_10.setObjectName(u"label_10")
         self.label_10.setMinimumSize(QSize(20, 0))
         self.label_10.setMaximumSize(QSize(20, 20))
+        self.label_10.setText(u"")
         self.label_10.setPixmap(QPixmap(os.path.dirname(__file__)+"/icons/cil-star.png"))
         self.label_10.setScaledContents(True)
         self.label_10.setAlignment(Qt.AlignCenter)
@@ -265,6 +262,7 @@ class Ui_TemplatesWindowUI(object):
         self.label_title_bar_top.setFont(font)
         self.label_title_bar_top.setStyleSheet(u"background: transparent;\n"
 "")
+        self.label_title_bar_top.setText(u"Km NodeGraph Easy Navigate")
         self.label_title_bar_top.setMargin(5)
 
         self.horizontalLayout_10.addWidget(self.label_title_bar_top)
@@ -303,6 +301,7 @@ class Ui_TemplatesWindowUI(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(40, 50, 62);\n"
 "}")
+        self.pushButton_minimize.setText(u"")
         icon = QIcon()
         icon.addFile(os.path.dirname(__file__)+"/icons/cil-window-minimize.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_minimize.setIcon(icon)
@@ -329,6 +328,7 @@ class Ui_TemplatesWindowUI(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(40, 50, 62);\n"
 "}")
+        self.pushButton_close.setText(u"")
         icon1 = QIcon()
         icon1.addFile(os.path.dirname(__file__)+"/icons/cil-x.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_close.setIcon(icon1)
@@ -387,6 +387,7 @@ class Ui_TemplatesWindowUI(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
+        self.pushButton_remove.setText(u"Remove")
         icon2 = QIcon()
         icon2.addFile(os.path.dirname(__file__)+"/icons/cil-trash.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_remove.setIcon(icon2)
@@ -397,10 +398,12 @@ class Ui_TemplatesWindowUI(object):
         font2.setFamily(u"Segoe UI Semibold")
         font2.setPointSize(13)
         self.label_2.setFont(font2)
+        self.label_2.setText(u"BookMark Templates")
         self.label_2.setAlignment(Qt.AlignCenter)
         self.label_3 = QLabel(self.frame_2)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(40, 33, 61, 21))
+        self.label_3.setText(u"Templates:")
         self.listWidget_templateList = QListWidget(self.frame_2)
         QListWidgetItem(self.listWidget_templateList)
         QListWidgetItem(self.listWidget_templateList)
@@ -412,6 +415,7 @@ class Ui_TemplatesWindowUI(object):
         self.label_8 = QLabel(self.frame_2)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(290, 33, 141, 21))
+        self.label_8.setText(u"Selected Template Items:")
         self.listWidget_templateItems = QListWidget(self.frame_2)
         QListWidgetItem(self.listWidget_templateItems)
         QListWidgetItem(self.listWidget_templateItems)
@@ -439,6 +443,7 @@ class Ui_TemplatesWindowUI(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
+        self.pushButton_load.setText(u"Load")
         icon3 = QIcon()
         icon3.addFile(os.path.dirname(__file__)+"/icons/cil-library-add.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_load.setIcon(icon3)
@@ -457,6 +462,7 @@ class Ui_TemplatesWindowUI(object):
         font3.setFamily(u"Segoe UI Semibold")
         self.label_plugins_version.setFont(font3)
         self.label_plugins_version.setStyleSheet(u"color: rgb(200, 200, 200);")
+        self.label_plugins_version.setText(u"Km NodeGraph Easy Navigate v2.0")
 
         self.horizontalLayout_2.addWidget(self.label_plugins_version)
 
@@ -470,6 +476,7 @@ class Ui_TemplatesWindowUI(object):
         self.label_credit.setObjectName(u"label_credit")
         self.label_credit.setFont(font3)
         self.label_credit.setStyleSheet(u"color: rgb(200, 200, 200);")
+        self.label_credit.setText(u"By Hossein Karamian")
         self.label_credit.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.verticalLayout.addWidget(self.label_credit)
@@ -509,6 +516,7 @@ class Ui_TemplatesWindowUI(object):
         self.label_18.setObjectName(u"label_18")
         self.label_18.setGeometry(QRect(0, 2, 271, 31))
         self.label_18.setFont(font2)
+        self.label_18.setText(u"Add New Template")
         self.label_18.setAlignment(Qt.AlignCenter)
         self.listWidget_newTemplateItems = QListWidget(self.frame_4)
         QListWidgetItem(self.listWidget_newTemplateItems)
@@ -522,12 +530,15 @@ class Ui_TemplatesWindowUI(object):
         self.label_5 = QLabel(self.frame_4)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(20, 30, 181, 21))
+        self.label_5.setText(u" Current Project Bookmarks:")
         self.label_4 = QLabel(self.frame_4)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(30, 216, 101, 21))
+        self.label_4.setText(u"Template Name :")
         self.lineEdit_templateName = QLineEdit(self.frame_4)
         self.lineEdit_templateName.setObjectName(u"lineEdit_templateName")
         self.lineEdit_templateName.setGeometry(QRect(130, 213, 121, 30))
+        self.lineEdit_templateName.setText(u"")
         self.pushButton_add = QPushButton(self.frame_4)
         self.pushButton_add.setObjectName(u"pushButton_add")
         self.pushButton_add.setGeometry(QRect(90, 249, 101, 35))
@@ -546,6 +557,7 @@ class Ui_TemplatesWindowUI(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
+        self.pushButton_add.setText(u"Add")
         icon4 = QIcon()
         icon4.addFile(os.path.dirname(__file__)+"/icons/cil-medical-cross.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_add.setIcon(icon4)
@@ -572,19 +584,12 @@ class Ui_TemplatesWindowUI(object):
     def retranslateUi(self, TemplatesWindowUI):
         TemplatesWindowUI.setWindowTitle(QCoreApplication.translate("TemplatesWindowUI", u"Km NodeGraph Easy Navigate : BookMarks Templates", None))
         self.label_16.setText("")
-        self.label_10.setText("")
-        self.label_title_bar_top.setText(QCoreApplication.translate("TemplatesWindowUI", u"Km NodeGraph Easy Navigate", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_minimize.setToolTip(QCoreApplication.translate("TemplatesWindowUI", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_minimize.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_close.setToolTip(QCoreApplication.translate("TemplatesWindowUI", u"Close", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_close.setText("")
-        self.pushButton_remove.setText(QCoreApplication.translate("TemplatesWindowUI", u"Remove", None))
-        self.label_2.setText(QCoreApplication.translate("TemplatesWindowUI", u"BookMark Templates", None))
-        self.label_3.setText(QCoreApplication.translate("TemplatesWindowUI", u"Templates:", None))
 
         __sortingEnabled = self.listWidget_templateList.isSortingEnabled()
         self.listWidget_templateList.setSortingEnabled(False)
@@ -598,7 +603,6 @@ class Ui_TemplatesWindowUI(object):
         ___qlistwidgetitem3.setText(QCoreApplication.translate("TemplatesWindowUI", u"Template 4", None));
         self.listWidget_templateList.setSortingEnabled(__sortingEnabled)
 
-        self.label_8.setText(QCoreApplication.translate("TemplatesWindowUI", u"Selected Template Items:", None))
 
         __sortingEnabled1 = self.listWidget_templateItems.isSortingEnabled()
         self.listWidget_templateItems.setSortingEnabled(False)
@@ -616,11 +620,7 @@ class Ui_TemplatesWindowUI(object):
         ___qlistwidgetitem9.setText(QCoreApplication.translate("TemplatesWindowUI", u"Clean", None));
         self.listWidget_templateItems.setSortingEnabled(__sortingEnabled1)
 
-        self.pushButton_load.setText(QCoreApplication.translate("TemplatesWindowUI", u"Load", None))
         self.checkBox_for_fake_focus.setText(QCoreApplication.translate("TemplatesWindowUI", u"CheckBox", None))
-        self.label_plugins_version.setText(QCoreApplication.translate("TemplatesWindowUI", u"Km NodeGraph Easy Navigate v2.0", None))
-        self.label_credit.setText(QCoreApplication.translate("TemplatesWindowUI", u"By Hossein Karamian", None))
-        self.label_18.setText(QCoreApplication.translate("TemplatesWindowUI", u"Add New Template", None))
 
         __sortingEnabled2 = self.listWidget_newTemplateItems.isSortingEnabled()
         self.listWidget_newTemplateItems.setSortingEnabled(False)
@@ -638,8 +638,5 @@ class Ui_TemplatesWindowUI(object):
         ___qlistwidgetitem15.setText(QCoreApplication.translate("TemplatesWindowUI", u"Clean", None));
         self.listWidget_newTemplateItems.setSortingEnabled(__sortingEnabled2)
 
-        self.label_5.setText(QCoreApplication.translate("TemplatesWindowUI", u" Current Project Bookmarks:", None))
-        self.label_4.setText(QCoreApplication.translate("TemplatesWindowUI", u"Template Name :", None))
-        self.pushButton_add.setText(QCoreApplication.translate("TemplatesWindowUI", u"Add", None))
     # retranslateUi
 

@@ -70,7 +70,6 @@ Data managment :
 # Import Nuke Libraries
 from re import template
 
-import PySide2
 import nuke  
 import nukescripts
 
@@ -92,6 +91,16 @@ from PysideImport import *
 import model
 from Ui_Settings import Ui_SettingsWindowUI
 from constants import BOOKMARK_KNOB_PREFIX
+
+
+
+            
+ ################################################################################
+## ui_  .py changes needed for new version from qt designer : 
+## add import os 
+## Replace  : 
+## u"../Km_NodeGraphEN/icons
+## os.path.dirname(__file__)+"/icons
 
 class MainWindow(QWidget):
     """Main Navigation Window, Includes Bookmark buttons"""
@@ -296,6 +305,10 @@ class BookmarkButton(QLabel):
         nuke.zoom( zoomScale, [ xC, yC ])
 
     def JumpToNode(self,targetNodeName) : 
+        if nuke.toNode(targetNodeName) is None:
+            nuke.message("Node of this bookmark does NOT exists \n Delete this bookmark \n Node Name: "+targetNodeName)
+            return False
+            
         if self.myParrent.settings["zoomEffect"] == "Enable":
             threading.Thread( target=self.JumpToTargetWithZoomEffect, args=(targetNodeName,)).start()
         else:
@@ -330,7 +343,7 @@ class BookmarkButton(QLabel):
                             bookmarkShortcut = newBookMarkWindowInstance.Shortcut.getValue()
                             model.Bookmarks.AddNewBookmark(bookmarkNodeName,bookmarkTitle,bookmarkIndex,bookmarkShortcut)
                     else :
-                        nuke.message("Selected node exists in the list, you can delete or edite that")
+                        nuke.message("Selected node ("+selectedNode['name'].getValue()+") exists in the list, you can delete or edite that. \nIf you can't find it in the list, increase number of bookmarks from settings(columns and rows)")
             # jump to bookmark
             else :
                 self.JumpToNode(self.nodeName)
@@ -683,7 +696,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.settings["nodeGraphZoomScale"] = "1"
         self.settings["bookmarksGridColumns"] = "3"
         self.settings["bookmarksGridRows"] = "3"
-        self.settings["bookmarksButtonWidth"] = "110"
+        self.settings["bookmarksButtonWidth"] = "130"
         self.settings["bookmarksButtonHeight"] = "50"
 
         model.Settings().Save(self.settings)
@@ -732,6 +745,7 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         
         self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
+        # self.label_plugins_version.setText('''Km NodeGraph Easy Navigate v2.0''')
 
         # UpdateUI
         self.UpdateUI()
@@ -947,8 +961,15 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
             model.Bookmarks.AddNewBookmark(bookmarkNodeName,bookmarkTitle,bookmarkIndex,bookmarkShortcut)
             self.UpdateUI()
         else :
-            nuke.message("Selected node exists in the list, you can delete or edite that")
-        self.raise_()
+            self.dialog = QMessageBox()
+            self.dialog.setIcon(QMessageBox.Information)
+            self.dialog.setWindowTitle("Message")
+            self.dialog.setText("Selected node ("+selectedNode['name'].getValue()+") exists in the list, you can delete or edite that. \nIf you can't find it in the list, increase number of bookmarks from settings(columns and rows)")
+            self.dialog.setStandardButtons(QMessageBox.Ok)
+            self.dialog.setDefaultButton(QMessageBox.Ok)
+            self.dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
+            self.dialog.exec_()
+        # self.raise_()
 
     def createBookmarksFromBackdrops(self):
         self.dialog = QMessageBox()

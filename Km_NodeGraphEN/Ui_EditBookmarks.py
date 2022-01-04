@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'panel_v02 - Bookmarks ListkrxGBA.ui'
+## Form generated from reading UI file 'panel_v02 - Bookmarks ListumliZW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
+# Pyside Library Import (pyside and pyside 2)  : pyside for nuke10.5 and older , pyside2 for nuke 11.0 and newer
+from PysideImport import *
 
 import os
 
@@ -283,6 +279,7 @@ class Ui_EditBookmarksWindowUI(object):
         self.label_9.setObjectName(u"label_9")
         self.label_9.setMinimumSize(QSize(20, 0))
         self.label_9.setMaximumSize(QSize(20, 20))
+        self.label_9.setText(u"")
         self.label_9.setPixmap(QPixmap(os.path.dirname(__file__)+"/icons/cil-menu.png"))
         self.label_9.setScaledContents(True)
         self.label_9.setAlignment(Qt.AlignCenter)
@@ -300,6 +297,7 @@ class Ui_EditBookmarksWindowUI(object):
         self.label_title_bar_top.setFont(font)
         self.label_title_bar_top.setStyleSheet(u"background: transparent;\n"
 "")
+        self.label_title_bar_top.setText(u"Km NodeGraph Easy Navigate")
         self.label_title_bar_top.setMargin(5)
 
         self.horizontalLayout_10.addWidget(self.label_title_bar_top)
@@ -338,6 +336,7 @@ class Ui_EditBookmarksWindowUI(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(40, 50, 62);\n"
 "}")
+        self.pushButton_minimize.setText(u"")
         icon = QIcon()
         icon.addFile(os.path.dirname(__file__)+"/icons/cil-window-minimize.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_minimize.setIcon(icon)
@@ -364,6 +363,7 @@ class Ui_EditBookmarksWindowUI(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(40, 50, 62);\n"
 "}")
+        self.pushButton_close.setText(u"")
         icon1 = QIcon()
         icon1.addFile(os.path.dirname(__file__)+"/icons/cil-x.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_close.setIcon(icon1)
@@ -390,6 +390,7 @@ class Ui_EditBookmarksWindowUI(object):
         font1.setFamily(u"Segoe UI Semibold")
         font1.setPointSize(13)
         self.label_2.setFont(font1)
+        self.label_2.setText(u"Edit Bookmarks")
         self.label_2.setAlignment(Qt.AlignCenter)
         self.tableWidget_BookmarksList = QTableWidget(self.frame_2)
         if (self.tableWidget_BookmarksList.columnCount() < 4):
@@ -533,6 +534,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_shiftUp.setText(u"")
         icon2 = QIcon()
         icon2.addFile(os.path.dirname(__file__)+"/icons/cil-arrow-circle-top.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_shiftUp.setIcon(icon2)
@@ -559,6 +561,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_shiftDown.setText(u"")
         icon3 = QIcon()
         icon3.addFile(os.path.dirname(__file__)+"/icons/cil-arrow-circle-bottom.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_shiftDown.setIcon(icon3)
@@ -585,6 +588,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_AddBookmark.setText(u"")
         icon4 = QIcon()
         icon4.addFile(os.path.dirname(__file__)+"/icons/cil-check-circle.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_AddBookmark.setIcon(icon4)
@@ -611,6 +615,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_removeItem.setText(u"")
         icon5 = QIcon()
         icon5.addFile(os.path.dirname(__file__)+"/icons/cil-x-circle.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_removeItem.setIcon(icon5)
@@ -637,6 +642,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_createFromBackdrops.setText(u"")
         icon6 = QIcon()
         icon6.addFile(os.path.dirname(__file__)+"/icons/cil-smile.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_createFromBackdrops.setIcon(icon6)
@@ -663,6 +669,7 @@ class Ui_EditBookmarksWindowUI(object):
 "	background-color: rgb(126, 177, 85);\n"
 "	border: 2px solid rgb(126, 177, 85);\n"
 "}")
+        self.pushButton_reset.setText(u"")
         icon7 = QIcon()
         icon7.addFile(os.path.dirname(__file__)+"/icons/cil-trash.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_reset.setIcon(icon7)
@@ -685,6 +692,7 @@ class Ui_EditBookmarksWindowUI(object):
         font4.setFamily(u"Segoe UI Semibold")
         self.label_plugins_version.setFont(font4)
         self.label_plugins_version.setStyleSheet(u"color: rgb(200, 200, 200);")
+        self.label_plugins_version.setText(u"Km NodeGraph Easy Navigate v2.0")
 
         self.horizontalLayout_3.addWidget(self.label_plugins_version)
 
@@ -698,6 +706,7 @@ class Ui_EditBookmarksWindowUI(object):
         self.label_credit.setObjectName(u"label_credit")
         self.label_credit.setFont(font4)
         self.label_credit.setStyleSheet(u"color: rgb(200, 200, 200);")
+        self.label_credit.setText(u"By Hossein Karamian")
         self.label_credit.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.verticalLayout_2.addWidget(self.label_credit)
@@ -730,17 +739,12 @@ class Ui_EditBookmarksWindowUI(object):
     def retranslateUi(self, EditBookmarksWindowUI):
         EditBookmarksWindowUI.setWindowTitle(QCoreApplication.translate("EditBookmarksWindowUI", u"Km NodeGraph Easy Navigate : Edit Bookmarks", None))
         self.label_16.setText("")
-        self.label_9.setText("")
-        self.label_title_bar_top.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Km NodeGraph Easy Navigate", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_minimize.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_minimize.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_close.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Close", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_close.setText("")
-        self.label_2.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Edit Bookmarks", None))
         ___qtablewidgetitem = self.tableWidget_BookmarksList.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Index (Order)", None));
         ___qtablewidgetitem1 = self.tableWidget_BookmarksList.horizontalHeaderItem(1)
@@ -772,29 +776,21 @@ class Ui_EditBookmarksWindowUI(object):
 #if QT_CONFIG(tooltip)
         self.pushButton_shiftUp.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Change order (move up)", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_shiftUp.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_shiftDown.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Change order (move down)", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_shiftDown.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_AddBookmark.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Assign Selected Node to Selected Bookmark", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_AddBookmark.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_removeItem.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Remove (Set Empty) Selected Bookmark", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_removeItem.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_createFromBackdrops.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Create Bookmarks From Backdrops", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_createFromBackdrops.setText("")
 #if QT_CONFIG(tooltip)
         self.pushButton_reset.setToolTip(QCoreApplication.translate("EditBookmarksWindowUI", u"Remove (Set Empty) All Bookmarks", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_reset.setText("")
         self.checkBox_for_fake_focus.setText("")
-        self.label_plugins_version.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"Km NodeGraph Easy Navigate v2.0", None))
-        self.label_credit.setText(QCoreApplication.translate("EditBookmarksWindowUI", u"By Hossein Karamian", None))
     # retranslateUi
 

@@ -312,7 +312,7 @@ border-bottom-right-radius: 1px;</string>
             </size>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
             <pixmap>../Km_NodeGraphEN/icons/cil-star.png</pixmap>
@@ -343,7 +343,7 @@ border-bottom-right-radius: 1px;</string>
 </string>
            </property>
            <property name="text">
-            <string>Km NodeGraph Easy Navigate</string>
+            <string notr="true">Km NodeGraph Easy Navigate</string>
            </property>
            <property name="margin">
             <number>5</number>
@@ -426,7 +426,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -474,7 +474,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset>
@@ -559,7 +559,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Remove</string>
+       <string notr="true">Remove</string>
       </property>
       <property name="icon">
        <iconset>
@@ -582,7 +582,7 @@ QPushButton:pressed {
        </font>
       </property>
       <property name="text">
-       <string>BookMark Templates</string>
+       <string notr="true">BookMark Templates</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -598,7 +598,7 @@ QPushButton:pressed {
        </rect>
       </property>
       <property name="text">
-       <string>Templates:</string>
+       <string notr="true">Templates:</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listWidget_templateList">
@@ -644,7 +644,7 @@ QPushButton:pressed {
        </rect>
       </property>
       <property name="text">
-       <string>Selected Template Items:</string>
+       <string notr="true">Selected Template Items:</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listWidget_templateItems">
@@ -721,7 +721,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Load</string>
+       <string notr="true">Load</string>
       </property>
       <property name="icon">
        <iconset>
@@ -763,7 +763,7 @@ QPushButton:pressed {
          <string notr="true">color: rgb(200, 200, 200);</string>
         </property>
         <property name="text">
-         <string>Km NodeGraph Easy Navigate v2.0</string>
+         <string notr="true">Km NodeGraph Easy Navigate v2.0</string>
         </property>
        </widget>
       </item>
@@ -793,7 +793,7 @@ QPushButton:pressed {
            <string notr="true">color: rgb(200, 200, 200);</string>
           </property>
           <property name="text">
-           <string>By Hossein Karamian</string>
+           <string notr="true">By Hossein Karamian</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -858,7 +858,7 @@ QListWidget::item:selected {
        </font>
       </property>
       <property name="text">
-       <string>Add New Template</string>
+       <string notr="true">Add New Template</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -914,7 +914,7 @@ QListWidget::item:selected {
        </rect>
       </property>
       <property name="text">
-       <string> Current Project Bookmarks:</string>
+       <string notr="true"> Current Project Bookmarks:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
@@ -927,7 +927,7 @@ QListWidget::item:selected {
        </rect>
       </property>
       <property name="text">
-       <string>Template Name :</string>
+       <string notr="true">Template Name :</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_templateName">
@@ -938,6 +938,9 @@ QListWidget::item:selected {
         <width>121</width>
         <height>30</height>
        </rect>
+      </property>
+      <property name="text">
+       <string notr="true"/>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_add">
@@ -974,7 +977,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>Add</string>
+       <string notr="true">Add</string>
       </property>
       <property name="icon">
        <iconset>
