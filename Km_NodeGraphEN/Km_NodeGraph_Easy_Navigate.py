@@ -97,6 +97,7 @@ from constants import BOOKMARK_KNOB_PREFIX
             
  ################################################################################
 ## ui_  .py changes needed for new version from qt designer : 
+## remove qt designer default imports and replace it with our PysideImport 
 ## add import os 
 ## Replace  : 
 ## u"../Km_NodeGraphEN/icons
