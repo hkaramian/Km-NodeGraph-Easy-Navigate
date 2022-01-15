@@ -39,13 +39,10 @@ Nuke Version: 13.x, 12.x, 11.x, 10.x
 
 ### ScreenShots
 <p align="center">
-![Km NodeGraph Easy Navigate v2.0](https://user-images.githubusercontent.com/93508495/149018084-81afa661-64d6-4ff8-88d3-294df1f36e59.png)
-
-![Km NodeGraph Easy Navigate v2.0](https://user-images.githubusercontent.com/93508495/149018095-b792be78-ae32-4055-8008-9554d7b74368.png)
-
-![Km NodeGraph Easy Navigate v2.0](https://user-images.githubusercontent.com/93508495/149018100-8bbc6775-581a-484f-8f55-0f7d45a0104f.png)
-
-![Km NodeGraph Easy Navigate v2.0](https://user-images.githubusercontent.com/93508495/149018102-822700ff-9d21-43d1-92d7-28a5ee0ea1c0.png)
+<img src="https://user-images.githubusercontent.com/93508495/149018084-81afa661-64d6-4ff8-88d3-294df1f36e59.png">
+<img src="https://user-images.githubusercontent.com/93508495/149018095-b792be78-ae32-4055-8008-9554d7b74368.png">
+<img src="https://user-images.githubusercontent.com/93508495/149018100-8bbc6775-581a-484f-8f55-0f7d45a0104f.png">
+<img src="https://user-images.githubusercontent.com/93508495/149018102-822700ff-9d21-43d1-92d7-28a5ee0ea1c0.png">
 </p>
 
  
