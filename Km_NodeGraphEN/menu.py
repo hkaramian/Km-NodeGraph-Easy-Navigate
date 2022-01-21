@@ -9,3 +9,4 @@ Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Nav
 Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Settings | Help","Km_NodeGraph_Easy_Navigate.ShowSettings()","")
 Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Edit Bookmarks","Km_NodeGraph_Easy_Navigate.ShowEditBookmarksWindow()","")
 Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Templates","Km_NodeGraph_Easy_Navigate.ShowTemplatesWindow()","")
+Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Survive (Reset Bookmarks)","Km_NodeGraph_Easy_Navigate.Survive()","")

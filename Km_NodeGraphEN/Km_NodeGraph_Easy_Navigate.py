@@ -254,7 +254,10 @@ class BookmarkButton(QLabel):
         if self.nodeName != "empty" :
             menu = nuke.menu("Nuke")
             Km_NGJ = menu.addMenu("KmTools")
-            Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+bookmarkData["title"],lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])
+            if int(nuke.env ["NukeVersionMajor"]) < 13 :
+                Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+str(bookmarkData["title"].encode('utf-8')),lambda: self.JumpToNode(bookmarkData['nodeName'].encode('utf-8')),bookmarkData["shortcut"])
+            else :
+                Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+str(bookmarkData["title"]),lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])
 
     def RemoveDefaultTextShadow(self):
         """Get Rid of nuke pyside default style that apply shadow for texts"""  
@@ -274,6 +277,8 @@ class BookmarkButton(QLabel):
         TargetNode = nuke.toNode(targetNodeName)
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
         yC = TargetNode.ypos()
+        if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
+            yC = yC + 150
         nuke.zoom( zoomScale, [ xC, yC ])
         #Shake :
         moveValue = 5  
@@ -291,7 +296,9 @@ class BookmarkButton(QLabel):
             time.sleep( 0.0001 )
             #print(datetime.datetime.now())
             xC = TargetNode.xpos() + TargetNode.screenWidth()/2
-            yC = TargetNode.ypos()
+            yC = TargetNode.ypos() 
+            if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
+                yC = yC + 150
             zoom = zoom + 0.05
             if zoom > zoomScale:
                 break
@@ -303,6 +310,8 @@ class BookmarkButton(QLabel):
         TargetNode = nuke.toNode(targetNodeName)
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
         yC = TargetNode.ypos()
+        if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
+            yC = yC + 150
         nuke.zoom( zoomScale, [ xC, yC ])
 
     def JumpToNode(self,targetNodeName) : 
@@ -1140,13 +1149,19 @@ def ShowMainWindow():
     mainWindowInstance = MainWindow()
     mainWindowInstance.show()
 
+def Survive():
+    """reset (remove all bookmarks in current project) in any case that bugs cause problems"""
+    if nuke.ask("Do you want to Remove all bookmarks in current project?\nThis option is here if in any case you encountered bugs and were not able to open the bookmarks window. "):
+        model.Bookmarks.ResetBookmarks()
+
 
 def updateShortcuts():
     """create an instance of main window to update bookmarks in top menu & shortcuts
       (we define each bookmark shortcut in BookmarkButton Class) """
     menu = nuke.menu("Nuke")
-    tappmenu = menu.findItem('KmTools/Km NodeGraph Easy Navigate')
-    tappmenu.removeItem('Bookmarks') # remove older shortcuts
+    if menu.findItem('KmTools/Km NodeGraph Easy Navigate') :
+        tappmenu = menu.findItem('KmTools/Km NodeGraph Easy Navigate')
+        tappmenu.removeItem('Bookmarks') # remove older shortcuts
     MainWindow() # define shortcuts
 
 # add nuke callbacks

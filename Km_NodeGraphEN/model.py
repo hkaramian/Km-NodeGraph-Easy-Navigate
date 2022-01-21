@@ -42,7 +42,7 @@ class Bookmarks():
             if BOOKMARK_KNOB_PREFIX in x: 
                 nodeName = x.replace(BOOKMARK_KNOB_PREFIX, '')
                 bookmarkDataString = nuke.root().knob(x).tooltip()
-                bookmarkData = json.loads(bookmarkDataString) # convert data string to dictinary
+                bookmarkData = json.loads(bookmarkDataString, strict=False) # convert data string to dictinary
                 allBookmarksData.append(bookmarkData)
                 # check if exist any bookmark for this postition
         return allBookmarksData
@@ -74,7 +74,7 @@ class Bookmarks():
         """return bookmark data dict"""
         knobName = BOOKMARK_KNOB_PREFIX + nodeName
         bookmarkDataString = nuke.root().knob(knobName).tooltip()
-        bookmarkData = json.loads(bookmarkDataString) # convert data string to dictinary
+        bookmarkData = json.loads(bookmarkDataString, strict=False) # convert data string to dictinary
         return bookmarkData
 
     @staticmethod
