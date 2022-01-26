@@ -641,7 +641,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
 
 
     def BuyMeACoffee(self) :
-        url = "https://www.buymeacoffee.com/karamian"
+        url = "http://www.hkaramian.com/index.php/donate/"
         webbrowser.open(url)
 
     def updateUI(self):

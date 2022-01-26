@@ -3,3 +3,4 @@ templates/
 Km_NodeGraphEN/Km_NodeGraph_Easy_Navigate.pyc
 *.pyc 
 settings.json
+*.tmp
