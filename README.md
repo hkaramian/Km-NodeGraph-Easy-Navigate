@@ -1,4 +1,4 @@
-## Km NodeGraph Easy Navigate v2.0
+## Km NodeGraph Easy Navigate v2
  It is a tool that I developed for easier navigation in Nuke node graph. Define Bookmarks for nodes and navigate easily.
 
  A user guide pdf file is included in the package
