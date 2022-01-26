@@ -1,7 +1,7 @@
 """Main controller"""
 
 #
-# Km NodeGraph Easy Navigate v2.0
+# Km NodeGraph Easy Navigate v2.1
 #
 # Developed By Hossein Karamian
 # 

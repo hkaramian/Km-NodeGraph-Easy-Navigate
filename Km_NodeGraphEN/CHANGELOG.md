@@ -1,5 +1,8 @@
 Changelog
 =========
+v2.1 | January 26 , 2022
+----
+    - Bug fix
 v2.0 | January 10 , 2022
 ----
     - New UI
