@@ -3,7 +3,7 @@
 
  A user guide pdf file is included in the package
 
- ## Last update (v2.2) :
+ ### Last update (v2.2)
     - Adding Toggles option (use same shortcut for two bookmarks)
     - Ability to close windows by pressing Escape key
     - Fit viewer to backdrop when jump to a backdrop
