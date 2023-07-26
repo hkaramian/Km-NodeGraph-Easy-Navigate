@@ -1,5 +1,11 @@
 Changelog
 =========
+v2.2 | July 26 , 2023
+----
+    - Adding Toggles option (use same shortcut for two bookmarks)
+    - Ability to close widnows by pressing Escape key
+    - Fit viewer to backdrop when jump to it (if bookmark is a backdrop)
+    - Bug fixes  (fix inputs included double quotes, fix windows in macOS)
 v2.1 | January 26 , 2022
 ----
     - Bug fix

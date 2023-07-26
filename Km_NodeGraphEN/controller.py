@@ -1,7 +1,7 @@
 """Main controller"""
 
 #
-# Km NodeGraph Easy Navigate v2.1
+# Km NodeGraph Easy Navigate v2.2
 #
 # Developed By Hossein Karamian
 # 
@@ -91,6 +91,8 @@ from PysideImport import *
 import model
 from Ui_Settings import Ui_SettingsWindowUI
 from constants import BOOKMARK_KNOB_PREFIX
+from constants import KM_EN_FULL_NAME
+
 
 
 
@@ -164,7 +166,7 @@ class MainWindow(QWidget):
                 columnCounter += 1
 
         # Menu Buttons layout
-        menuButtonsLayoutWidget = MainMenuWidget()
+        menuButtonsLayoutWidget = MainMenuWidget(self)
         menuButtonsLayoutWidget.setMinimumHeight(40)
         menuButtonsLayoutWidget.setMaximumHeight(40)
 
@@ -197,7 +199,8 @@ class MainWindow(QWidget):
         self.setWindowFlags(Qt.Tool)
         self.setWindowFlags(Qt.FramelessWindowHint)
         # make sure the widgets closes when it loses focus
-        self.installEventFilter(self)
+        if platform.system() != "Darwin":
+            self.installEventFilter(self)
 
     def keyPressEvent(self, event):  # pylint: disable=invalid-name
         """Route key press event to certain behaviors.
@@ -257,7 +260,7 @@ class BookmarkButton(QLabel):
             if int(nuke.env ["NukeVersionMajor"]) < 13 :
                 Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+str(bookmarkData["title"].encode('utf-8')),lambda: self.JumpToNode(bookmarkData['nodeName'].encode('utf-8')),bookmarkData["shortcut"])
             else :
-                Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+str(bookmarkData["title"]),lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])
+                Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/"+str(bookmarkData["title"]),lambda: self.JumpToNode(bookmarkData['nodeName']),bookmarkData["shortcut"])        
 
     def RemoveDefaultTextShadow(self):
         """Get Rid of nuke pyside default style that apply shadow for texts"""  
@@ -278,8 +281,11 @@ class BookmarkButton(QLabel):
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
         yC = TargetNode.ypos()
         if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
-            yC = yC + 150
-        nuke.zoom( zoomScale, [ xC, yC ])
+            TargetNode.setSelected(True)
+            nuke.zoomToFitSelected()
+        else :
+            nuke.zoom( zoomScale, [ xC, yC ])
+
         #Shake :
         moveValue = 5  
         for i in range( 0, 8 ):
@@ -298,11 +304,13 @@ class BookmarkButton(QLabel):
             xC = TargetNode.xpos() + TargetNode.screenWidth()/2
             yC = TargetNode.ypos() 
             if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
-                yC = yC + 150
-            zoom = zoom + 0.05
-            if zoom > zoomScale:
-                break
-            nuke.zoom( zoom, [ xC, yC ])
+                TargetNode.setSelected(True)
+                nuke.zoomToFitSelected()
+            else :
+                zoom = zoom + 0.05
+                if zoom > zoomScale:
+                    break
+                nuke.zoom( zoom, [ xC, yC ])
 
     def JumpToTargetWithoutEffect(self,targetNodeName):
         self.settings = model.Settings().Load()
@@ -311,19 +319,38 @@ class BookmarkButton(QLabel):
         xC = TargetNode.xpos() + TargetNode.screenWidth()/2
         yC = TargetNode.ypos()
         if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
-            yC = yC + 150
-        nuke.zoom( zoomScale, [ xC, yC ])
+            #yC = yC + 150
+            TargetNode.setSelected(True)
+            nuke.zoomToFitSelected()
+        else :
+            nuke.zoom( zoomScale, [ xC, yC ])
 
     def JumpToNode(self,targetNodeName) : 
+        # Set toggle if exist
+        toggle1, toggle2, lastToggle, toggleShortcut = model.Bookmarks.GetToggles()
+        if targetNodeName == toggle1 or targetNodeName == toggle2:
+            if lastToggle == toggle1 :
+                lastToggle = toggle2
+            else :
+                lastToggle = toggle1
+            menu = nuke.menu("Nuke")
+            Km_NGJ = menu.addMenu("KmTools")
+            Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Bookmarks/ActiveToggle",lambda: self.JumpToNode(lastToggle),toggleShortcut)
+        model.Bookmarks.UpdateToggles(toggle1,toggle2,lastToggle,toggleShortcut)
+
+        # if not does not exist anymore
         if nuke.toNode(targetNodeName) is None:
             nuke.message("Node of this bookmark does NOT exists \n Delete this bookmark \n Node Name: "+targetNodeName)
             return False
-            
+
+        # Which Jump
+        # Zoom effect
         if self.myParrent.settings["zoomEffect"] == "Enable":
             threading.Thread( target=self.JumpToTargetWithZoomEffect, args=(targetNodeName,)).start()
+        # without effect
         else:
             self.JumpToTargetWithoutEffect(targetNodeName)
-
+        # Shake effect
         if self.myParrent.settings["shakeEffect"] == "Enable":
             threading.Thread( target=self.JumpToTargetAndShakeNode, args=(targetNodeName,)).start()
 
@@ -384,8 +411,10 @@ class BookmarkButton(QLabel):
 class MainMenuWidget(QWidget):
     """Main """
 
-    def __init__(self):
+    def __init__(self, parrent):
         super(MainMenuWidget, self).__init__()
+
+        self.parrent = parrent
 
         self.menuButtonsLayout = QHBoxLayout(self)
         self.menuButtonsLayout.setSpacing(6)
@@ -482,14 +511,17 @@ class MainMenuWidget(QWidget):
         global settingsWindowInstance
         settingsWindowInstance = SettingsWindow()
         settingsWindowInstance.show()
+        self.parrent.close()
         
     def OpenTemplatesWindow(self) : 
         self.templatesWindowInstance = TemplatesWindow()
         self.templatesWindowInstance.show()
+        self.parrent.close()
 
     def OpenEditBookmarksWindow(self) : 
         self.editBookmarksInstance = EditBookmarksWindow()
         self.editBookmarksInstance.show()
+        self.parrent.close()
 
 
 
@@ -610,6 +642,9 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
         centerY = int(QDesktopWidget().screenGeometry(-1).height()/2.0 - self.height()/2.0)
         self.move(centerX,centerY)
+
+        # set version name
+        self.label_plugins_version.setText(KM_EN_FULL_NAME)
         
         self.updateUI()
 
@@ -626,6 +661,17 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.pushButton_BuyMeACoffee.setStyle(QStyleFactory.create('Windows'))
         self.pushButton_OpenPDF.setStyle(QStyleFactory.create('Windows'))
 
+    # # close window once Escape key is pressed
+    # def closeEvent(self, event):
+    #     if event.key() == Qt.Key_Escape:
+    #         self.close()
+    #     else:
+    #         event.ignore()
+
+    def keyPressEvent(self, event):  # pylint: disable=invalid-name
+        if event.key() == Qt.Key_Escape:
+            self.close()
+
     # for adding window drag to title bar
     def mousePressEvent(self, event ) :
         self.clickPosition = event.globalPos()
@@ -641,7 +687,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
 
 
     def BuyMeACoffee(self) :
-        url = "http://www.hkaramian.com/index.php/donate/"
+        url = "http://www.hkaramian.com/"
         webbrowser.open(url)
 
     def updateUI(self):
@@ -695,7 +741,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         model.Settings().Save(self.settings)
         menu = nuke.menu("Nuke")
         Km_NGJ = menu.addMenu("KmTools")
-        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.ShowMainWindow()",self.settings["shortcut"])
+        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","controller.ShowMainWindow()",self.settings["shortcut"])
         self.close()
 
     def SetDefault(self) : 
@@ -712,7 +758,7 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         model.Settings().Save(self.settings)
         menu = nuke.menu("Nuke")
         Km_NGJ = menu.addMenu("KmTools")
-        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","Km_NodeGraph_Easy_Navigate.ShowMainWindow()",self.settings["shortcut"])
+        Km_NGJ.addCommand("Km NodeGraph Easy Navigate/Show Panel","controller.ShowMainWindow()",self.settings["shortcut"])
         self.updateUI()
 
     def open_documentation(self):
@@ -755,7 +801,9 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         
         self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
-        # self.label_plugins_version.setText('''Km NodeGraph Easy Navigate v2.0''')
+        
+        # set version name
+        self.label_plugins_version.setText(KM_EN_FULL_NAME)
 
         # UpdateUI
         self.UpdateUI()
@@ -787,6 +835,11 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
     # for adding window drag to title bar
     def mousePressEvent(self, event ) :
         self.clickPosition = event.globalPos()
+
+    def keyPressEvent(self, event):  # pylint: disable=invalid-name
+        if event.key() == Qt.Key_Escape:
+            self.close()
+
     # adding window drag to title bar
     def AddWindowDragToTitleBar(self):
         def moveWindow(e):
@@ -902,6 +955,9 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         self.label_credit.setText('''<a href='http://www.hkaramian.com' style='color: rgb(200, 200, 200);text-decoration: none;'>By Hossein Karamian</a>''')
         self.label_credit.setOpenExternalLinks(True)
 
+        # set version name
+        self.label_plugins_version.setText(KM_EN_FULL_NAME)
+
         # adding window drag to title bar
         self.AddWindowDragToTitleBar()
 
@@ -927,6 +983,9 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         # UpdateUI
         self.UpdateUI()
 
+    def keyPressEvent(self, event):  # pylint: disable=invalid-name
+        if event.key() == Qt.Key_Escape:
+            self.close()
 
     def RemoveDefaultTextShadow(self):
         """Get Rid of nuke pyside default style that apply shadow for texts"""   
@@ -1151,7 +1210,7 @@ def ShowMainWindow():
 
 def Survive():
     """reset (remove all bookmarks in current project) in any case that bugs cause problems"""
-    if nuke.ask("Do you want to Remove all bookmarks in current project?\nThis option is here if in any case you encountered bugs and were not able to open the bookmarks window. "):
+    if nuke.ask("Do you want to Remove all bookmarks in current project?\nThis option is here in case you encountered bugs and were not able to open the bookmarks window. "):
         model.Bookmarks.ResetBookmarks()
 
 
@@ -1164,5 +1223,7 @@ def updateShortcuts():
         tappmenu.removeItem('Bookmarks') # remove older shortcuts
     MainWindow() # define shortcuts
 
+
 # add nuke callbacks
 nuke.addOnScriptLoad(updateShortcuts)
+

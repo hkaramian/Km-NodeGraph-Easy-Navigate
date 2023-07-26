@@ -642,7 +642,7 @@ class Ui_SettingsWindowUI(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
-        self.pushButton_BuyMeACoffee.setText(u"Buy Me a Coffee")
+        self.pushButton_BuyMeACoffee.setText(u"Check more tools")
         icon5 = QIcon()
         icon5.addFile(os.path.dirname(__file__)+"/icons/cil-heart.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_BuyMeACoffee.setIcon(icon5)

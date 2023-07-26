@@ -25,7 +25,7 @@
 ### Compatibility
 OS : Window, Linux
 
-Nuke Version: 13.x, 12.x, 11.x, 10.x
+Nuke Version: 14.x, 13.x, 12.x, 11.x, 10.x
 
 
 
