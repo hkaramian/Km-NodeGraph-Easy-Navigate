@@ -11,7 +11,7 @@
     - Made the code cleaner
 
  Full Change log : 
- <a href=" https://github.com/hkaramian/Km-NodeGraph-Easy-Navigate/blob/main/Km_NodeGraphEN/CHANGELOG.md" target="_blank">Km_NodeGraphEN/CHANGELOG.md</a>
+ <a href="Km_NodeGraphEN/CHANGELOG.md" target="_blank">Km_NodeGraphEN/CHANGELOG.md</a>
 
 
 
