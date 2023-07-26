@@ -64,7 +64,15 @@ Data managment :
                                     }
                                 }
 
+## PySide UI :
+## ui_  .py changes needed for new version from qt designer : 
+## add import os 
+## Replace  : 
+## u"../Km_NodeGraphEN/icons
+## os.path.dirname(__file__)+"/icons                              
 """
+
+
 
 
 # Import Nuke Libraries
@@ -95,22 +103,14 @@ from constants import KM_EN_FULL_NAME
 
 
 
-
-            
- ################################################################################
-## ui_  .py changes needed for new version from qt designer : 
-## remove qt designer default imports and replace it with our PysideImport 
-## add import os 
-## Replace  : 
-## u"../Km_NodeGraphEN/icons
-## os.path.dirname(__file__)+"/icons
-
 class MainWindow(QWidget):
     """Main Navigation Window, Includes Bookmark buttons"""
 
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.UIinit()
 
+    def UIinit(self):
         self.settings = model.Settings().Load()
 
         bookmarksGridColumns = int(self.settings["bookmarksGridColumns"])# defualt : 3*3
@@ -125,9 +125,6 @@ class MainWindow(QWidget):
         height = bookmarksGridRows * bookmarkButtonHeight + bookmarkButtonsMargin  # standard value : 250 for 3*3
         
         self.setFixedSize(width, height + menuBarHeight)
-        #QDesktopWidget().screenGeometry(-1).width()
-        #screenHeight = QDesktopWidget().screenGeometry(-1).height()
-        #QCursor.pos().x()
         offset = QPoint(width * 0.5, height * 0.5 + 30)
         self.move(QCursor.pos() - offset)
         self.setContentsMargins(0,0,0,0)
@@ -230,6 +227,9 @@ class BookmarkButton(QLabel):
     index : order & position in bookmarks ==> values :  integer number(0,1,2,..) """
     def __init__(self, bookmarkData,parrent,width=70,height=70):
         super(BookmarkButton, self).__init__()
+        self.UIinit(bookmarkData,parrent,width,height)
+
+    def UIinit(self,bookmarkData,parrent,width,height):
         self.myParrent = parrent
         self.index = bookmarkData["index"]
         self.nodeName = bookmarkData["nodeName"]
@@ -413,9 +413,10 @@ class MainMenuWidget(QWidget):
 
     def __init__(self, parrent):
         super(MainMenuWidget, self).__init__()
-
         self.parrent = parrent
+        self.UIinit()
 
+    def UIinit(self):
         self.menuButtonsLayout = QHBoxLayout(self)
         self.menuButtonsLayout.setSpacing(6)
         self.menuButtonsLayout.setObjectName(u"horizontalLayout_2")
@@ -506,7 +507,6 @@ class MainMenuWidget(QWidget):
         QWidget.setTabOrder(self.pushButton_EditBookmarks,self.pushButton_settings)
         QWidget.setTabOrder(self.pushButton_settings,self.pushButton_Templates)
 
-
     def OpenSettingsWindow(self) : 
         global settingsWindowInstance
         settingsWindowInstance = SettingsWindow()
@@ -580,24 +580,26 @@ class NewBookMarkWindow(nukescripts.PythonPanel):
             self.addKnob(self.Shortcut)
             self.setMinimumSize(500,500)
 
-
-
-
             
- ################################################################################
-## ui_  .py changes needed for new version from qt designer : 
-## add import os 
-## Replace  : 
-## u"../Km_NodeGraphEN/icons
-## os.path.dirname(__file__)+"/icons
-
-
 
 class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
     def __init__(self):
         super(SettingsWindow, self).__init__()
         self.setupUi(self)
 
+        self.UIinit()
+       
+        # Signals
+        self.pushButton_save.clicked.connect(self.applySettings)
+        self.pushButton_setDefault.clicked.connect(self.SetDefault)
+        self.pushButton_OpenPDF.clicked.connect(self.open_documentation)
+        self.pushButton_BuyMeACoffee.clicked.connect(self.BuyMeACoffee)
+        self.pushButton_minimize.clicked.connect(self.showMinimized)
+        self.pushButton_close.clicked.connect(self.close)
+        
+        self.updateUI()
+
+    def UIinit(self):
         ## REMOVE TITLE BAR
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -629,14 +631,6 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
 
         # adding window drag to title bar
         self.AddWindowDragToTitleBar()
-        
-        # Signals
-        self.pushButton_save.clicked.connect(self.applySettings)
-        self.pushButton_setDefault.clicked.connect(self.SetDefault)
-        self.pushButton_OpenPDF.clicked.connect(self.open_documentation)
-        self.pushButton_BuyMeACoffee.clicked.connect(self.BuyMeACoffee)
-        self.pushButton_minimize.clicked.connect(self.showMinimized)
-        self.pushButton_close.clicked.connect(self.close)
 
         # for linux , set window position to center 
         centerX = int(QDesktopWidget().screenGeometry(-1).width()/2.0 - self.width()/2.0)
@@ -645,9 +639,6 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
 
         # set version name
         self.label_plugins_version.setText(KM_EN_FULL_NAME)
-        
-        self.updateUI()
-
 
     def RemoveDefaultTextShadow(self):
         """Get Rid of nuke pyside default style that apply shadow for texts"""   
@@ -660,13 +651,6 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
         self.pushButton_setDefault.setStyle(QStyleFactory.create('Windows'))
         self.pushButton_BuyMeACoffee.setStyle(QStyleFactory.create('Windows'))
         self.pushButton_OpenPDF.setStyle(QStyleFactory.create('Windows'))
-
-    # # close window once Escape key is pressed
-    # def closeEvent(self, event):
-    #     if event.key() == Qt.Key_Escape:
-    #         self.close()
-    #     else:
-    #         event.ignore()
 
     def keyPressEvent(self, event):  # pylint: disable=invalid-name
         if event.key() == Qt.Key_Escape:
@@ -773,14 +757,17 @@ class SettingsWindow(QMainWindow,Ui_SettingsWindowUI):
                 subprocess.Popen(["xdg-open", path])
 
 
-
 from Ui_Templates import Ui_TemplatesWindowUI
 
 class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
     def __init__(self,parent=None):
         super(TemplatesWindow, self).__init__(parent)
         self.setupUi(self)
+        self.UIinit()
 
+
+    def UIinit(self):
+        
         # remove text shadows
         self.RemoveDefaultTextShadow()
 
@@ -823,6 +810,10 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
 
         checkBoxStyle = 'QCheckBox::indicator:checked {background-image: url('+os.path.dirname(__file__).replace(os.sep,'/')+'/icons/cil-check-alt.png);}'
 
+        # Hide the credit to make the window cleaner
+        self.label_credit.setVisible(False)
+        self.label_plugins_version.setVisible(False)
+
 
     def RemoveDefaultTextShadow(self):
         """Get Rid of nuke pyside default style that apply shadow for texts"""   
@@ -830,7 +821,6 @@ class TemplatesWindow(QMainWindow,Ui_TemplatesWindowUI):
         self.pushButton_load.setStyle(QStyleFactory.create('Windows'))
         self.pushButton_remove.setStyle(QStyleFactory.create('Windows'))
         self.pushButton_add.setStyle(QStyleFactory.create('Windows'))
-
 
     # for adding window drag to title bar
     def mousePressEvent(self, event ) :
@@ -939,6 +929,13 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         super(EditBookmarksWindow, self).__init__(parent)
         self.setupUi(self)
 
+        # UI initialization
+        self.UIinit()
+
+        # UpdateUI
+        self.UpdateUI()
+
+    def UIinit(self):
         ## REMOVE TITLE BAR
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint) 
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -980,8 +977,9 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         centerY = int(QDesktopWidget().screenGeometry(-1).height()/2.0 - self.height()/2.0)
         self.move(centerX,centerY)
 
-        # UpdateUI
-        self.UpdateUI()
+        # Hide the credit to make the window cleaner
+        self.label_credit.setVisible(False)
+        self.label_plugins_version.setVisible(False)
 
     def keyPressEvent(self, event):  # pylint: disable=invalid-name
         if event.key() == Qt.Key_Escape:
@@ -1004,8 +1002,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         bookmarkData = {"nodeName": nodeName,"title": title, "index": row, "shortcut" : shortcut}
         model.Bookmarks.UpdateBookmarkData(bookmarkData)
         self.UpdateUI()
-
-
 
     def AddNewBookmark(self):
         if nuke.selectedNodes() == [] :
@@ -1106,8 +1102,7 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         currentColumn = self.tableWidget_BookmarksList.currentColumn()
         self.tableWidget_BookmarksList.setCurrentCell(selectedIndex + 1,currentColumn) # shift down selected cell 
         self.UpdateUI()
-        
-        
+               
     def resetBookmarks(self):
         self.dialog = QMessageBox()
         self.dialog.setIcon(QMessageBox.Question)
@@ -1179,13 +1174,6 @@ class EditBookmarksWindow(QMainWindow,Ui_EditBookmarksWindowUI):
         return widgetItem
 
 
-            
- ################################################################################
-## ui_  .py changes needed for new version from qt designer : 
-## add import os 
-## Replace  : 
-## u"../Km_NodeGraphEN/icons
-## os.path.dirname(__file__)+"/icons
 
 def ShowSettings():
     global settingsWindowInstance

@@ -17,13 +17,13 @@ class Ui_TemplatesWindowUI(object):
     def setupUi(self, TemplatesWindowUI):
         if not TemplatesWindowUI.objectName():
             TemplatesWindowUI.setObjectName(u"TemplatesWindowUI")
-        TemplatesWindowUI.resize(906, 410)
+        TemplatesWindowUI.resize(906, 392)
         TemplatesWindowUI.setStyleSheet(u"color: rgb(223, 223, 223);")
         self.centralwidget = QWidget(TemplatesWindowUI)
         self.centralwidget.setObjectName(u"centralwidget")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(12, 12, 885, 391))
+        self.frame.setGeometry(QRect(12, 12, 885, 373))
         self.frame.setStyleSheet(u"QFrame {\n"
 "	background-color: rgb(61, 64, 71);\n"
 "	border-radius : 10px;\n"

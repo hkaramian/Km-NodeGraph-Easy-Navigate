@@ -17,12 +17,12 @@ class Ui_EditBookmarksWindowUI(object):
     def setupUi(self, EditBookmarksWindowUI):
         if not EditBookmarksWindowUI.objectName():
             EditBookmarksWindowUI.setObjectName(u"EditBookmarksWindowUI")
-        EditBookmarksWindowUI.resize(633, 545)
+        EditBookmarksWindowUI.resize(633, 525)
         self.centralwidget = QWidget(EditBookmarksWindowUI)
         self.centralwidget.setObjectName(u"centralwidget")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(10, 10, 611, 521))
+        self.frame.setGeometry(QRect(10, 10, 611, 503))
         self.frame.setStyleSheet(u"QLabel {\n"
 "color: rgb(223, 223, 223);\n"
 "}\n"
