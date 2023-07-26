@@ -1,7 +1,19 @@
-## Km NodeGraph Easy Navigate v2
+## Km NodeGraph Easy Navigate
  It is a tool that I developed for easier navigation in Nuke node graph. Define Bookmarks for nodes and navigate easily.
 
  A user guide pdf file is included in the package
+
+ ## Last update (v2.2) :
+    - Adding Toggles option (use same shortcut for two bookmarks)
+    - Ability to close windows by pressing Escape key
+    - Fit viewer to backdrop when jump to a backdrop
+    - Bug fixes  (fix inputs included double quotes, fix windows in macOS)
+    - Made the code cleaner
+
+ Full Change log : 
+ <a href=" https://github.com/hkaramian/Km-NodeGraph-Easy-Navigate/blob/main/Km_NodeGraphEN/CHANGELOG.md" target="_blank">Km_NodeGraphEN
+/CHANGELOG.md</a>
+
 
 
 ## Introduction video
@@ -23,7 +35,7 @@
  
 
 ### Compatibility
-OS : Window, Linux
+OS : Window, macOS, Linux
 
 Nuke Version: 14.x, 13.x, 12.x, 11.x, 10.x
 
