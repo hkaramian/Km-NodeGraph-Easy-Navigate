@@ -320,6 +320,8 @@ class BookmarkButton(QLabel):
         yC = TargetNode.ypos()
         if nuke.toNode(targetNodeName).Class() == "BackdropNode": 
             #yC = yC + 150
+            for x in nuke.selectedNodes():
+                x.setSelected(False)
             TargetNode.setSelected(True)
             nuke.zoomToFitSelected()
         else :
